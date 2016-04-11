@@ -78,6 +78,9 @@
             this.dtgrdwExp = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dtgrdwMatrixNew = new System.Windows.Forms.DataGridView();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -276,6 +279,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(321, 82);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -544,11 +548,41 @@
             this.dtgrdwMatrixNew.Size = new System.Drawing.Size(321, 261);
             this.dtgrdwMatrixNew.TabIndex = 44;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(638, 63);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(102, 13);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "Исходная матрица";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(638, 346);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(157, 13);
+            this.label9.TabIndex = 46;
+            this.label9.Text = "Модифицированная матрица:";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(306, 141);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Полное попарное сопоставление";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1115, 641);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.dtgrdwMatrixNew);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
@@ -641,6 +675,9 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ListBox listRang;
         private System.Windows.Forms.DataGridView dtgrdwMatrixNew;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }
 

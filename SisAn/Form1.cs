@@ -35,6 +35,7 @@ namespace SisAn
             dtgrdwExp.Columns.Add("eval", "оценка");
             groupBox1.Visible = false;
             dtgrdwMatrixNew.Visible = false;
+            label9.Visible = false;
         }
 
         #region
@@ -249,7 +250,7 @@ namespace SisAn
                     }
                 }
             }
-            else if (tabControl1.SelectedIndex == 1)
+            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
             {
                 {
                     for (int i = 0; i < dtgrdwMatrix.Rows.Count; ++i)
@@ -441,52 +442,55 @@ namespace SisAn
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e) //автоподстановка
         {
-            /*dtgrdwMatrix[e.RowIndex, e.ColumnIndex].Value =
-                (1.0 - Convert.ToSingle(dtgrdwMatrix[e.ColumnIndex, e.RowIndex].Value));
-            //check();*/
+            if (tabControl1.SelectedIndex == 0)
+            {
+
+                dtgrdwMatrix[e.RowIndex, e.ColumnIndex].Value =
+                    (1.0 - Convert.ToSingle(dtgrdwMatrix[e.ColumnIndex, e.RowIndex].Value));
+                check();
+            }
         }
 
         private void матрицаПредпочтенийToolStripMenuItem1_Click(object sender, EventArgs e) //сохранение МП
         {
-            switch (tabControl1.SelectedIndex)
+            if (tabControl1.SelectedIndex == 0)
             {
-                case 0:
+                {
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        string Out = string.Empty;
+                        for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
                         {
-                            string Out = string.Empty;
-                            for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
+                            for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
                             {
-                                for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
-                                {
-                                    if (i == j)
-                                        Out += "_\t";
-                                    else
-                                        Out += dtgrdwMatrix[j, i].Value + "\t";
-                                }
-                                Out += "\n";
-                            }
-                            File.WriteAllText(saveFileDialog1.FileName, Out);
-                        }
-                    }
-                    break;
-                case 1:
-                    {
-                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                        {
-                            string Out = string.Empty;
-                            for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
-                            {
-                                for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
-                                {
+                                if (i == j)
+                                    Out += "_\t";
+                                else
                                     Out += dtgrdwMatrix[j, i].Value + "\t";
-                                }
-                                Out += "\n";
                             }
-                            File.WriteAllText(saveFileDialog1.FileName, Out);
+                            Out += "\n";
                         }
+                        File.WriteAllText(saveFileDialog1.FileName, Out);
                     }
-                    break;
+                }
+            }
+            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
+            {
+                {
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        string Out = string.Empty;
+                        for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
+                        {
+                            for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
+                            {
+                                Out += dtgrdwMatrix[j, i].Value + "\t";
+                            }
+                            Out += "\n";
+                        }
+                        File.WriteAllText(saveFileDialog1.FileName, Out);
+                    }
+                }
             }
         }
 
@@ -877,10 +881,14 @@ namespace SisAn
                 groupBox1.Visible = true;
             }
             if (tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
+            {
                 dtgrdwMatrixNew.Visible = true;
+                label9.Visible = true;
+            }
             else
             {
                 dtgrdwMatrixNew.Visible = false;
+                label9.Visible = false;
             }
         }
 
