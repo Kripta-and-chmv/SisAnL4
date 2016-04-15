@@ -88,6 +88,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -206,7 +207,7 @@
             // 
             // btnSort
             // 
-            this.btnSort.Location = new System.Drawing.Point(968, 172);
+            this.btnSort.Location = new System.Drawing.Point(968, 277);
             this.btnSort.Name = "btnSort";
             this.btnSort.Size = new System.Drawing.Size(135, 60);
             this.btnSort.TabIndex = 3;
@@ -663,11 +664,20 @@
             this.label16.TabIndex = 52;
             this.label16.Text = "Итоговый список альтернатив:";
             // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(968, 164);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
+            this.checkedListBox1.TabIndex = 44;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1115, 641);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
@@ -773,6 +783,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }
 

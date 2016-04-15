@@ -347,18 +347,18 @@ namespace SisAn
                 }
 
                 /////////////////////////////////////
-                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                txtbxAddAlt.Text = "";
+                //lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                //txtbxAddAlt.Text = "";
                 dtgrdwMatrix2.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
                 //////////////////////////////////////        
-                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                txtbxAddAlt.Text = "";
+                //lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                //txtbxAddAlt.Text = "";
                 dtgrdwMatrix3.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
                 //////////////////////////////////////////////////////////////////
-                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                txtbxAddAlt.Text = "";
+                //lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                //txtbxAddAlt.Text = "";
                 dtgrdwMatrix4.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
 
