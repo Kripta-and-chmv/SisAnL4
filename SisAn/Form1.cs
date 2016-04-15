@@ -29,13 +29,12 @@ namespace SisAn
         private void Form1_Load(object sender, EventArgs e)
         {
             dtgrdwMatrix.AllowUserToAddRows = false; //запрешаем пользователю самому добавлять строки
-            dtgrdwMatrixNew.AllowUserToAddRows = false;
+            
             dtgrdwExp.AllowUserToAddRows = false;
             dtgrdwExp.Columns.Add("exp", "эксперт");
             dtgrdwExp.Columns.Add("eval", "оценка");
             groupBox1.Visible = false;
-            dtgrdwMatrixNew.Visible = false;
-            label9.Visible = false;
+           
         }
 
         #region
@@ -126,25 +125,23 @@ namespace SisAn
                      {
                          sortedList[i] = lstbxAltList.Items[i].ToString();
                      }
-                   for(int i = 0; i < countAlt; i++)
-                        dtgrdwMatrixNew.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
-                   dtgrdwMatrixNew.Rows.Add(countExp);
+                 
                     float L = 0;
                    float[] L_j = new float[countAlt];
                    float[] V = new float[countAlt];
+                    float[,] newMatr=new float[countExp,countAlt];
                     for (int i = 0; i < countAlt; i++)//модифицированная матрица предпочтений
                     {
                         for (int j = 0; j < countExp; j++)
                         {
-                            dtgrdwMatrixNew[i, j].Value = countAlt - Convert.ToSingle(dtgrdwMatrix[i, j].Value);
-                            
+                            newMatr[j, i] = countAlt - Convert.ToSingle(dtgrdwMatrix[i, j].Value);
                         }
                     }
                     for (int j = 0; j < countAlt; j++) //суммарные оценки предпочтений
                     {
                         for (int i = 0; i < countExp; i++)
                         {
-                            L_j[j] += Convert.ToSingle(dtgrdwMatrixNew[j, i].Value.ToString());
+                            L_j[j] += newMatr[i, j];
                         }
                         L += L_j[j];//сумма всех альтернатив
                     }
@@ -168,11 +165,10 @@ namespace SisAn
                     {
                         sortedList[i] = lstbxAltList.Items[i].ToString();
                     }
-                    for (int i = 0; i < countAlt; i++)
-                        dtgrdwMatrixNew.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
-                    dtgrdwMatrixNew.Rows.Add(countExp);
+                    
                     float[] S_i = new float[countExp];
                     float[] V = new float[countAlt];
+                    float[,] newMatr = new float[countExp, countAlt];
                     for (int j = 0; j < countExp; j++) //суммарные оценок всех альтернатив
                     {
                         for (int i = 0; i < countAlt; i++)
@@ -185,15 +181,14 @@ namespace SisAn
                     {
                         for (int j = 0; j < countExp; j++)
                         {
-                            dtgrdwMatrixNew[i, j].Value = Convert.ToSingle(dtgrdwMatrix[i, j].Value)/S_i[j];
-
+                            newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix[i, j].Value)/S_i[j];
                         }
                     }
                     for (int j = 0; j < countAlt; j++)
                     {
                         for (int i = 0; i < countExp; i++) //определяем веса
                         {
-                            V[j] += Convert.ToSingle(dtgrdwMatrixNew[j, i].Value.ToString()) / countExp;
+                           V[j] += newMatr[i, j]/countExp;
                         }
 
                     }
@@ -424,8 +419,7 @@ namespace SisAn
                     listPredp.Items.Clear();
                     dtgrdwExp.Rows.Clear();
                     dtgrdwExp.Columns.Clear();
-                    dtgrdwMatrixNew.Rows.Clear();
-                    dtgrdwMatrixNew.Columns.Clear();
+                    
                 }
                     break;
                 case 3:
@@ -433,8 +427,7 @@ namespace SisAn
                         listRang.Items.Clear();
                         dtgrdwExp.Rows.Clear();
                         dtgrdwExp.Columns.Clear();
-                        dtgrdwMatrixNew.Rows.Clear();
-                        dtgrdwMatrixNew.Columns.Clear();
+                        
                     }
                     break;
             }
@@ -880,16 +873,7 @@ namespace SisAn
             {
                 groupBox1.Visible = true;
             }
-            if (tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
-                dtgrdwMatrixNew.Visible = true;
-                label9.Visible = true;
-            }
-            else
-            {
-                dtgrdwMatrixNew.Visible = false;
-                label9.Visible = false;
-            }
+          
         }
 
 

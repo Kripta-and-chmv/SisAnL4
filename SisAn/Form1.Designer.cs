@@ -59,6 +59,7 @@
             this.listPredp = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listRang = new System.Windows.Forms.ListBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -77,10 +78,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dtgrdwExp = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtgrdwMatrixNew = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -90,7 +88,6 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrdwExp)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrixNew)).BeginInit();
             this.SuspendLayout();
             // 
             // dtgrdwMatrix
@@ -363,6 +360,16 @@
             this.listRang.Size = new System.Drawing.Size(301, 134);
             this.listRang.TabIndex = 23;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(306, 141);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Полное попарное сопоставление";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -537,17 +544,6 @@
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             // 
-            // dtgrdwMatrixNew
-            // 
-            this.dtgrdwMatrixNew.AllowUserToOrderColumns = true;
-            this.dtgrdwMatrixNew.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dtgrdwMatrixNew.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrixNew.Location = new System.Drawing.Point(641, 360);
-            this.dtgrdwMatrixNew.Name = "dtgrdwMatrixNew";
-            this.dtgrdwMatrixNew.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtgrdwMatrixNew.Size = new System.Drawing.Size(321, 261);
-            this.dtgrdwMatrixNew.TabIndex = 44;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -557,33 +553,12 @@
             this.label8.TabIndex = 45;
             this.label8.Text = "Исходная матрица";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(638, 346);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(157, 13);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "Модифицированная матрица:";
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(306, 141);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Полное попарное сопоставление";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1115, 641);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.dtgrdwMatrixNew);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
@@ -617,7 +592,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgrdwExp)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrixNew)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -674,9 +648,7 @@
         private System.Windows.Forms.ListBox listPredp;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ListBox listRang;
-        private System.Windows.Forms.DataGridView dtgrdwMatrixNew;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage tabPage5;
     }
 }
