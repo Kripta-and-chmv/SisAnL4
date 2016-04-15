@@ -33,8 +33,8 @@ namespace SisAn
             dtgrdwMatrix3.AllowUserToAddRows = false;
             dtgrdwMatrix4.AllowUserToAddRows = false;
             dtgrdwExp.AllowUserToAddRows = false;
-            dtgrdwExp.Columns.Add("exp", "эксперт");
-            dtgrdwExp.Columns.Add("eval", "оценка");
+            dtgrdwExp.Columns.Add("exp", "Эксперт");
+            dtgrdwExp.Columns.Add("Eval", "Оценка");
             groupBox1.Visible = false;
            
         }
@@ -43,165 +43,179 @@ namespace SisAn
 
         private void button1_Click(object sender, EventArgs e) //сам алгоритм
         {
-            switch (tabControl1.SelectedIndex)
-            {
-                case 0:
+           for (int ind = 0; ind < checkBox.Items.Count; ind++)
+                {
+                    switch (ind)
                     {
-                        int count = lstbxAltList.Items.Count;
-                        float[] C = new float[count];
-                        string[] sortedList = new string[count];
-                        for (int i = 0; i < count; i++)
+                        case 0:
                         {
-                            sortedList[i] = lstbxAltList.Items[i].ToString();
-                        }
-                        /*if (!check())
-                        {
-                            return;
-                        }*/
-                        float R = 0;
-                        for (int i = 0; i < count; i++)
-                            C[i] = 0;
-
-                        for (int i = 0; i < count; i++)
-                        {
-                            for (int j = 0; j < count; j++)
+                            if (checkBox.GetItemChecked(ind))
                             {
-                                if (j != i)
                                 {
-                                    C[i] += Convert.ToSingle(dtgrdwMatrix1[i, j].Value.ToString().Replace(".", ","));
-                                    R += Convert.ToSingle(dtgrdwMatrix1[i, j].Value.ToString().Replace(".", ","));
+                                    int count = lstbxAltList.Items.Count;
+                                    float[] C = new float[count];
+                                    string[] sortedList = new string[count];
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        sortedList[i] = lstbxAltList.Items[i].ToString();
+                                    }
+
+                                    float R = 0;
+                                    for (int i = 0; i < count; i++)
+                                        C[i] = 0;
+
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        for (int j = 0; j < count; j++)
+                                        {
+                                            if (j != i)
+                                            {
+                                                C[i] += Convert.ToSingle(dtgrdwMatrix1[i, j].Value.ToString().Replace(".", ","));
+                                                R += Convert.ToSingle(dtgrdwMatrix1[i, j].Value.ToString().Replace(".", ","));
+                                            }
+                                        }
+                                    }
+                                    for (int i = 0; i < count; i++)
+                                        C[i] = C[i] / R;
+                                    BubbleSort(C, sortedList);
+                                    lstbxAltNewList.Items.Clear();
+                                    lstbxAltNewList.Items.AddRange(sortedList);
                                 }
                             }
-
                         }
-                        for (int i = 0; i < count; i++)
-                            C[i] = C[i] / R;
-                        BubbleSort(C, sortedList);
-
-                        lstbxAltNewList.Items.AddRange(sortedList);
-                    }
-                    break;
-                case 1:
-                    {
-                        float R = 0;
-
-                        int countExp = dtgrdwExp.Rows.Count;
-                        int countAlt = lstbxAltList.Items.Count;
-                        string[] sortedList = new string[countAlt];
-                        for (int i = 0; i < countAlt; i++)
+                            break;
+                        case 1:
                         {
-                            sortedList[i] = lstbxAltList.Items[i].ToString();
-                        }
-                        float[] R_i = new float[countExp];
-                        float[] S = new float[countExp];
-                        float[] V = new float[countAlt];
-                        for (int i = 0; i < countExp; i++)
-                        {
-                            R_i[i] = Convert.ToSingle(dtgrdwExp.Rows[i].Cells[1].Value.ToString().Replace(".", ","));
-                            R += R_i[i];
-                        }
-                        for (int j = 0; j < countExp; j++) //относительные оценки компетенции экспертов
-                        {
-                            S[j] = R_i[j] / R;
-                        }
-                        for (int j = 0; j < countAlt; j++)
-                        {
-                            for (int i = 0; i < countExp; i++) //определяем веса
+                            if (checkBox.GetItemChecked(ind))
                             {
-                                V[j] += Convert.ToSingle(dtgrdwMatrix2[j, i].Value.ToString().Replace(".", ",")) * S[i];
+                                {
+                                    float R = 0;
+
+                                    int countExp = dtgrdwExp.Rows.Count;
+                                    int countAlt = lstbxAltList.Items.Count;
+                                    string[] sortedList = new string[countAlt];
+                                    for (int i = 0; i < countAlt; i++)
+                                    {
+                                        sortedList[i] = lstbxAltList.Items[i].ToString();
+                                    }
+                                    float[] R_i = new float[countExp];
+                                    float[] S = new float[countExp];
+                                    float[] V = new float[countAlt];
+                                    for (int i = 0; i < countExp; i++)
+                                    {
+                                        R_i[i] = Convert.ToSingle(dtgrdwExp.Rows[i].Cells[1].Value.ToString().Replace(".", ","));
+                                        R += R_i[i];
+                                    }
+                                    for (int j = 0; j < countExp; j++) //относительные оценки компетенции экспертов
+                                    {
+                                        S[j] = R_i[j] / R;
+                                    }
+                                    for (int j = 0; j < countAlt; j++)
+                                    {
+                                        for (int i = 0; i < countExp; i++) //определяем веса
+                                        {
+                                            V[j] += Convert.ToSingle(dtgrdwMatrix2[j, i].Value.ToString().Replace(".", ",")) *
+                                                    S[i];
+                                        }
+                                    }
+                                    BubbleSort(V, sortedList); //сортируем
+
+                                    list_Alt_new.Items.Clear();
+                                    list_Alt_new.Items.AddRange(sortedList);
+                                }
                             }
-
                         }
-                        BubbleSort(V, sortedList); //сортируем
-
-                        list_Alt_new.Items.Clear();
-                        list_Alt_new.Items.AddRange(sortedList);
-                    }
-                    break;
-                case 2:
-                {
-                     int countExp = dtgrdwExp.Rows.Count;
-                     int countAlt = lstbxAltList.Items.Count;
-                     string[] sortedList = new string[countAlt];
-                     for (int i = 0; i < countAlt; i++)
-                     {
-                         sortedList[i] = lstbxAltList.Items[i].ToString();
-                     }
-                 
-                    float L = 0;
-                   float[] L_j = new float[countAlt];
-                   float[] V = new float[countAlt];
-                    float[,] newMatr=new float[countExp,countAlt];
-                    for (int i = 0; i < countAlt; i++)//модифицированная матрица предпочтений
-                    {
-                        for (int j = 0; j < countExp; j++)
+                            break;
+                    case 2:
                         {
-                            newMatr[j, i] = countAlt - Convert.ToSingle(dtgrdwMatrix3[i, j].Value);
-                        }
-                    }
-                    for (int j = 0; j < countAlt; j++) //суммарные оценки предпочтений
-                    {
-                        for (int i = 0; i < countExp; i++)
-                        {
-                            L_j[j] += newMatr[i, j];
-                        }
-                        L += L_j[j];//сумма всех альтернатив
-                    }
-                   
-                    for (int j = 0; j < countAlt; j++) //веса альтернатив
-                    {
-                        V[j] = L_j[j] / L;
-                    }
-                    BubbleSort(V, sortedList); //сортируем
-                    listPredp.Items.Clear();
-                    listPredp.Items.AddRange(sortedList);
+                            if (checkBox.GetItemChecked(ind))
+                            {
+                                {
+                                    int countExp = dtgrdwExp.Rows.Count;
+                                    int countAlt = lstbxAltList.Items.Count;
+                                    string[] sortedList = new string[countAlt];
+                                    for (int i = 0; i < countAlt; i++)
+                                    {
+                                        sortedList[i] = lstbxAltList.Items[i].ToString();
+                                    }
 
+                                    float L = 0;
+                                    float[] L_j = new float[countAlt];
+                                    float[] V = new float[countAlt];
+                                    float[,] newMatr = new float[countExp, countAlt];
+                                    for (int i = 0; i < countAlt; i++) //модифицированная матрица предпочтений
+                                    {
+                                        for (int j = 0; j < countExp; j++)
+                                        {
+                                            newMatr[j, i] = countAlt - Convert.ToSingle(dtgrdwMatrix3[i, j].Value);
+                                        }
+                                    }
+                                    for (int j = 0; j < countAlt; j++) //суммарные оценки предпочтений
+                                    {
+                                        for (int i = 0; i < countExp; i++)
+                                        {
+                                            L_j[j] += newMatr[i, j];
+                                        }
+                                        L += L_j[j]; //сумма всех альтернатив
+                                    }
+
+                                    for (int j = 0; j < countAlt; j++) //веса альтернатив
+                                    {
+                                        V[j] = L_j[j] / L;
+                                    }
+                                    BubbleSort(V, sortedList); //сортируем
+                                    listPredp.Items.Clear();
+                                    listPredp.Items.AddRange(sortedList);
+                                }
+                            }
+                        }
+                            break;
+                        case 3:
+                        {
+                            if (checkBox.GetItemChecked(ind))
+                            {
+                                {
+                                    int countExp = dtgrdwExp.Rows.Count;
+                                    int countAlt = lstbxAltList.Items.Count;
+                                    string[] sortedList = new string[countAlt];
+                                    for (int i = 0; i < countAlt; i++)
+                                    {
+                                        sortedList[i] = lstbxAltList.Items[i].ToString();
+                                    }
+
+                                    float[] S_i = new float[countExp];
+                                    float[] V = new float[countAlt];
+                                    float[,] newMatr = new float[countExp, countAlt];
+                                    for (int j = 0; j < countExp; j++) //суммарные оценок всех альтернатив
+                                    {
+                                        for (int i = 0; i < countAlt; i++)
+                                        {
+                                            S_i[j] += Convert.ToSingle(dtgrdwMatrix4[i, j].Value.ToString());
+                                        }
+                                    }
+                                    for (int i = 0; i < countAlt; i++) //модифицированная матрица предпочтений
+                                    {
+                                        for (int j = 0; j < countExp; j++)
+                                        {
+                                            newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix4[i, j].Value) / S_i[j];
+                                        }
+                                    }
+                                    for (int j = 0; j < countAlt; j++)
+                                    {
+                                        for (int i = 0; i < countExp; i++) //определяем веса
+                                        {
+                                            V[j] += newMatr[i, j] / countExp;
+                                        }
+                                    }
+                                    BubbleSort(V, sortedList); //сортируем
+                                    listRang.Items.Clear();
+                                    listRang.Items.AddRange(sortedList);
+                                }
+                            }
+                        }
+                            break;
+                    }             
                 }
-                    break;
-                case 3:
-                {
-                    int countExp = dtgrdwExp.Rows.Count;
-                    int countAlt = lstbxAltList.Items.Count;
-                    string[] sortedList = new string[countAlt];
-                    for (int i = 0; i < countAlt; i++)
-                    {
-                        sortedList[i] = lstbxAltList.Items[i].ToString();
-                    }
-                    
-                    float[] S_i = new float[countExp];
-                    float[] V = new float[countAlt];
-                    float[,] newMatr = new float[countExp, countAlt];
-                    for (int j = 0; j < countExp; j++) //суммарные оценок всех альтернатив
-                    {
-                        for (int i = 0; i < countAlt; i++)
-                        {
-                            S_i[j] += Convert.ToSingle(dtgrdwMatrix4[i, j].Value.ToString());
-                        }
-                        
-                    }
-                    for (int i = 0; i < countAlt; i++)//модифицированная матрица предпочтений
-                    {
-                        for (int j = 0; j < countExp; j++)
-                        {
-                            newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix4[i, j].Value)/S_i[j];
-                        }
-                    }
-                    for (int j = 0; j < countAlt; j++)
-                    {
-                        for (int i = 0; i < countExp; i++) //определяем веса
-                        {
-                           V[j] += newMatr[i, j]/countExp;
-                        }
-
-                    }
-                    BubbleSort(V, sortedList); //сортируем
-                    listRang.Items.Clear();
-                    listRang.Items.AddRange(sortedList);
-
-                }
-                    break;
-            }
-
         }
 
         void BubbleSort(float[] A, string[] sortedList) //сортировка альтернатив
@@ -254,7 +268,7 @@ namespace SisAn
                         {
                             for (int j = 0; j < dtgrdwMatrix2.Columns.Count; ++j)
                             {
-                                dtgrdwMatrix2[i, j].Value = "";
+                                dtgrdwMatrix2[j, i].Value = "";
                             }
                         }
                     }
@@ -265,7 +279,7 @@ namespace SisAn
                         {
                             for (int j = 0; j < dtgrdwMatrix3.Columns.Count; ++j)
                             {
-                                dtgrdwMatrix3[i, j].Value = "";
+                                dtgrdwMatrix3[j, i].Value = "";
                             }
                         }
                     }
@@ -276,7 +290,7 @@ namespace SisAn
                     {
                         for (int j = 0; j < dtgrdwMatrix4.Columns.Count; ++j)
                         {
-                            dtgrdwMatrix4[i, j].Value = "";
+                            dtgrdwMatrix4[j, i].Value = "";
                         }
                     }
                 }
@@ -347,18 +361,15 @@ namespace SisAn
                 }
 
                 /////////////////////////////////////
-                //lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                //txtbxAddAlt.Text = "";
+               
                 dtgrdwMatrix2.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
                 //////////////////////////////////////        
-                //lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                //txtbxAddAlt.Text = "";
+               
                 dtgrdwMatrix3.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
                 //////////////////////////////////////////////////////////////////
-                //lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                //txtbxAddAlt.Text = "";
+                
                 dtgrdwMatrix4.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
 
@@ -419,23 +430,18 @@ namespace SisAn
                     {
                         list_Alt_new.Items.Clear();
                         dtgrdwExp.Rows.Clear();
-                        dtgrdwExp.Columns.Clear();
                     }
                     break;
                 case 2:
                 {
                     listPredp.Items.Clear();
-                    dtgrdwExp.Rows.Clear();
-                    dtgrdwExp.Columns.Clear();
-                    
+                    dtgrdwExp.Rows.Clear(); 
                 }
                     break;
                 case 3:
                     {
                         listRang.Items.Clear();
-                        dtgrdwExp.Rows.Clear();
-                        dtgrdwExp.Columns.Clear();
-                        
+                        dtgrdwExp.Rows.Clear();                       
                     }
                     break;
             }
@@ -583,7 +589,7 @@ namespace SisAn
                         }
                     }
                 }
-                load = true;  
+                
                 //для 2,3,4 метода
                 dtgrdwMatrix2.Rows.Clear();
                 dtgrdwMatrix3.Rows.Clear();
@@ -594,7 +600,7 @@ namespace SisAn
                     dtgrdwMatrix3.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
                     dtgrdwMatrix4.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
                 }
-                
+                load = true;  
                 lstbxAltList.Items.Clear();
                 for (int i = 1; i <= alts.Length; i++)
                 {
@@ -766,17 +772,28 @@ namespace SisAn
 
         private void add_exp_Click(object sender, EventArgs e) //добавить эксперта
         {
-            if (txtAddExp.Text != "" && txtAddEval.Text != "")
+            
+            switch (tabControl1.SelectedIndex)
             {
-                dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);
-                txtAddExp.Text = "";
-                txtAddEval.Text = "";
-                dtgrdwMatrix2.Rows.Add();
-                dtgrdwMatrix2.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
-                dtgrdwMatrix3.Rows.Add();
-                dtgrdwMatrix3.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
-                dtgrdwMatrix4.Rows.Add();
-                dtgrdwMatrix4.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+
+                case 1:
+                case 2:
+                case 3:
+                {
+                    if (txtAddExp.Text != "" && txtAddEval.Text != "")
+                    {
+                        dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);
+                        txtAddExp.Text = "";
+                        txtAddEval.Text = "";
+                        dtgrdwMatrix2.Rows.Add();
+                        dtgrdwMatrix2.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                        dtgrdwMatrix3.Rows.Add();
+                        dtgrdwMatrix3.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                        dtgrdwMatrix4.Rows.Add();
+                        dtgrdwMatrix4.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                    }
+                }
+                    break;
             }
         }
 
