@@ -28,8 +28,10 @@ namespace SisAn
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dtgrdwMatrix.AllowUserToAddRows = false; //запрешаем пользователю самому добавлять строки
-            
+            dtgrdwMatrix1.AllowUserToAddRows = false; //запрешаем пользователю самому добавлять строки
+            dtgrdwMatrix2.AllowUserToAddRows = false;
+            dtgrdwMatrix3.AllowUserToAddRows = false;
+            dtgrdwMatrix4.AllowUserToAddRows = false;
             dtgrdwExp.AllowUserToAddRows = false;
             dtgrdwExp.Columns.Add("exp", "эксперт");
             dtgrdwExp.Columns.Add("eval", "оценка");
@@ -66,8 +68,8 @@ namespace SisAn
                             {
                                 if (j != i)
                                 {
-                                    C[i] += Convert.ToSingle(dtgrdwMatrix[i, j].Value.ToString().Replace(".", ","));
-                                    R += Convert.ToSingle(dtgrdwMatrix[i, j].Value.ToString().Replace(".", ","));
+                                    C[i] += Convert.ToSingle(dtgrdwMatrix1[i, j].Value.ToString().Replace(".", ","));
+                                    R += Convert.ToSingle(dtgrdwMatrix1[i, j].Value.ToString().Replace(".", ","));
                                 }
                             }
 
@@ -106,7 +108,7 @@ namespace SisAn
                         {
                             for (int i = 0; i < countExp; i++) //определяем веса
                             {
-                                V[j] += Convert.ToSingle(dtgrdwMatrix[j, i].Value.ToString().Replace(".", ",")) * S[i];
+                                V[j] += Convert.ToSingle(dtgrdwMatrix2[j, i].Value.ToString().Replace(".", ",")) * S[i];
                             }
 
                         }
@@ -134,7 +136,7 @@ namespace SisAn
                     {
                         for (int j = 0; j < countExp; j++)
                         {
-                            newMatr[j, i] = countAlt - Convert.ToSingle(dtgrdwMatrix[i, j].Value);
+                            newMatr[j, i] = countAlt - Convert.ToSingle(dtgrdwMatrix3[i, j].Value);
                         }
                     }
                     for (int j = 0; j < countAlt; j++) //суммарные оценки предпочтений
@@ -173,7 +175,7 @@ namespace SisAn
                     {
                         for (int i = 0; i < countAlt; i++)
                         {
-                            S_i[j] += Convert.ToSingle(dtgrdwMatrix[i, j].Value.ToString());
+                            S_i[j] += Convert.ToSingle(dtgrdwMatrix4[i, j].Value.ToString());
                         }
                         
                     }
@@ -181,7 +183,7 @@ namespace SisAn
                     {
                         for (int j = 0; j < countExp; j++)
                         {
-                            newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix[i, j].Value)/S_i[j];
+                            newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix4[i, j].Value)/S_i[j];
                         }
                     }
                     for (int j = 0; j < countAlt; j++)
@@ -223,66 +225,89 @@ namespace SisAn
 
         private void очиститьToolStripMenuItem_Click(object sender, EventArgs e) //очистка матрицы
         {
-            if (tabControl1.SelectedIndex == 0)
+            switch (tabControl1.SelectedIndex)
             {
+                case 0:
                 {
-                    for (int i = 0; i < dtgrdwMatrix.Rows.Count; ++i)
+                    for (int i = 0; i < dtgrdwMatrix1.Rows.Count; ++i)
                     {
-                        for (int j = 0; j < dtgrdwMatrix.Columns.Count; ++j)
+                        for (int j = 0; j < dtgrdwMatrix1.Columns.Count; ++j)
                         {
                             if (i != j)
                             {
-                                dtgrdwMatrix[j, i].Style.BackColor = Color.White;
-                                dtgrdwMatrix[i, j].Value = "1";
-                                dtgrdwMatrix[j, i].Value = "0";
+                                dtgrdwMatrix1[j, i].Style.BackColor = Color.White;
+                                dtgrdwMatrix1[i, j].Value = "1";
+                                dtgrdwMatrix1[j, i].Value = "0";
                             }
                             else
                             {
-                                dtgrdwMatrix[i, i].Style.BackColor = Color.Aqua;
-                                dtgrdwMatrix[i, i].ReadOnly = true;
+                                dtgrdwMatrix1[i, i].Style.BackColor = Color.Aqua;
+                                dtgrdwMatrix1[i, i].ReadOnly = true;
                             }
                         }
                     }
                 }
-            }
-            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
-                {
-                    for (int i = 0; i < dtgrdwMatrix.Rows.Count; ++i)
+                    break;
+                case 1:
                     {
-                        for (int j = 0; j < dtgrdwMatrix.Columns.Count; ++j)
+                        for (int i = 0; i < dtgrdwMatrix2.Rows.Count; ++i)
                         {
-                            dtgrdwMatrix[i, j].Value = "";
+                            for (int j = 0; j < dtgrdwMatrix2.Columns.Count; ++j)
+                            {
+                                dtgrdwMatrix2[i, j].Value = "";
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        for (int i = 0; i < dtgrdwMatrix3.Rows.Count; ++i)
+                        {
+                            for (int j = 0; j < dtgrdwMatrix3.Columns.Count; ++j)
+                            {
+                                dtgrdwMatrix3[i, j].Value = "";
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                {
+                    for (int i = 0; i < dtgrdwMatrix4.Rows.Count; ++i)
+                    {
+                        for (int j = 0; j < dtgrdwMatrix4.Columns.Count; ++j)
+                        {
+                            dtgrdwMatrix4[i, j].Value = "";
                         }
                     }
                 }
+                    break;
             }
         }
 
         bool check() //проверки
         {
 
-            for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
+            for (int i = 0; i < dtgrdwMatrix1.Rows.Count; i++)
             {
-                for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
+                for (int j = 0; j < dtgrdwMatrix1.Columns.Count; j++)
                 {
                     if (i != j)
-                        if ((!el.Contains(dtgrdwMatrix[i, j].Value)))
+                        if ((!el.Contains(dtgrdwMatrix1[i, j].Value)))
                         {
                             MessageBox.Show("Неверно задана матрица предпочтений!");
-                            dtgrdwMatrix[i, j].Value = "1";
-                            dtgrdwMatrix[j, i].Value = "0";
+                            dtgrdwMatrix1[i, j].Value = "1";
+                            dtgrdwMatrix1[j, i].Value = "0";
                             return false;
                         }
                         else
                         {
-                            float a = Convert.ToSingle(dtgrdwMatrix[i, j].Value) +
-                                      Convert.ToSingle(dtgrdwMatrix[j, i].Value);
+                            float a = Convert.ToSingle(dtgrdwMatrix1[i, j].Value) +
+                                      Convert.ToSingle(dtgrdwMatrix1[j, i].Value);
                             if (a !=
                                 1.0)
                             {
                                 MessageBox.Show("Неверно задана матрица предпочтений!");
-                                dtgrdwMatrix[i, j].Style.BackColor = dtgrdwMatrix[j, i].Style.BackColor = Color.Red;
+                                dtgrdwMatrix1[i, j].Style.BackColor = dtgrdwMatrix1[j, i].Style.BackColor = Color.Red;
                                 return false;
                             }
                             else
@@ -295,100 +320,77 @@ namespace SisAn
 
         private void Add_altern_Click(object sender, EventArgs e) //добавить альтернативу
         {
-            if (tabControl1.SelectedIndex == 0)
+            ///////////////////////////////////////////////////
+            if (txtbxAddAlt.Text != "")
             {
+                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                txtbxAddAlt.Text = "";
+                dtgrdwMatrix1.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
+                    "z" + lstbxAltList.Items.Count.ToString());
+                dtgrdwMatrix1.Rows.Add();
+                dtgrdwMatrix1.Rows[lstbxAltList.Items.Count - 1].HeaderCell.Value = "z" +
+                                                                                    lstbxAltList.Items.Count
+                                                                                        .ToString();
+                for (int i = 0; i < dtgrdwMatrix1.Rows.Count; ++i)
                 {
-                    if (txtbxAddAlt.Text != "")
+                    int j = dtgrdwMatrix1.Rows.Count - 1;
+                    if (i == j)
                     {
-                        lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                        txtbxAddAlt.Text = "";
-                        dtgrdwMatrix.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
-                            "z" + lstbxAltList.Items.Count.ToString());
-                        dtgrdwMatrix.Rows.Add();
-                        dtgrdwMatrix.Rows[lstbxAltList.Items.Count - 1].HeaderCell.Value = "z" +
-                                                                                           lstbxAltList.Items.Count
-                                                                                               .ToString();
-                        for (int i = 0; i < dtgrdwMatrix.Rows.Count; ++i)
-                        {
-                            int j = dtgrdwMatrix.Rows.Count - 1;
-                            if (i == j)
-                            {
-                                dtgrdwMatrix[i, i].Style.BackColor = Color.Aqua;
-                                dtgrdwMatrix[i, i].ReadOnly = true;
-                            }
-                            else
-                            {
-                                dtgrdwMatrix[j, i].Value = "0";
-                                dtgrdwMatrix[i, j].Value = "1";
-                            }
-                        }
+                        dtgrdwMatrix1[i, i].Style.BackColor = Color.Aqua;
+                        dtgrdwMatrix1[i, i].ReadOnly = true;
+                    }
+                    else
+                    {
+                        dtgrdwMatrix1[j, i].Value = "0";
+                        dtgrdwMatrix1[i, j].Value = "1";
                     }
                 }
-            }
-            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
-                {
-                    if (txtbxAddAlt.Text != "")
-                    {
-                        lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
-                        txtbxAddAlt.Text = "";
-                        dtgrdwMatrix.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
-                            "z" + lstbxAltList.Items.Count.ToString());
-                    }
-                }
+
+                /////////////////////////////////////
+                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                txtbxAddAlt.Text = "";
+                dtgrdwMatrix2.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
+                    "z" + lstbxAltList.Items.Count.ToString());
+                //////////////////////////////////////        
+                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                txtbxAddAlt.Text = "";
+                dtgrdwMatrix3.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
+                    "z" + lstbxAltList.Items.Count.ToString());
+                //////////////////////////////////////////////////////////////////
+                lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
+                txtbxAddAlt.Text = "";
+                dtgrdwMatrix4.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
+                    "z" + lstbxAltList.Items.Count.ToString());
+
             }
         }
 
         private void Del_altern_Click(object sender, EventArgs e) //удаление выбранных альтернатив
         {
-            if (tabControl1.SelectedIndex == 0)
+            if ((lstbxAltList.Items.Count != 0) && (lstbxAltList.SelectedIndex != -1))
             {
+                int ch = lstbxAltList.SelectedItem.ToString().IndexOf("]");
+                int k = int.Parse(lstbxAltList.SelectedItem.ToString().Substring(1, ch - 1));
+                dtgrdwMatrix1.Rows.RemoveAt(k - 1);
+                dtgrdwMatrix1.Columns.RemoveAt(k - 1);
+                dtgrdwMatrix2.Columns.RemoveAt(k - 1);
+                dtgrdwMatrix3.Columns.RemoveAt(k - 1);
+                dtgrdwMatrix4.Columns.RemoveAt(k - 1);
+                lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);
+                for (int i = 0; i < lstbxAltList.Items.Count; i++)
                 {
-                    if ((lstbxAltList.Items.Count != 0) && (lstbxAltList.SelectedIndex != -1))
+                    dtgrdwMatrix1.Rows[i].HeaderCell.Value = "z" + (i + 1).ToString();
+                    dtgrdwMatrix1.Columns[i].HeaderText = "z" + (i + 1).ToString();
+                    dtgrdwMatrix2.Columns[i].HeaderText = "z" + (i + 1).ToString();
+                    dtgrdwMatrix3.Columns[i].HeaderText = "z" + (i + 1).ToString();
+                    dtgrdwMatrix4.Columns[i].HeaderText = "z" + (i + 1).ToString();
+                    int buf = lstbxAltList.Items[i].ToString().IndexOf("]", StringComparison.Ordinal);
+                    int ind = int.Parse(lstbxAltList.Items[i].ToString().Substring(1, buf - 1));
+                    if (ind > k)
                     {
-                        int ch = lstbxAltList.SelectedItem.ToString().IndexOf("]");
-                        int k = int.Parse(lstbxAltList.SelectedItem.ToString().Substring(1, ch - 1));
-                        dtgrdwMatrix.Rows.RemoveAt(k - 1);
-                        dtgrdwMatrix.Columns.RemoveAt(k - 1);
-                        lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);
-                        for (int i = 0; i < lstbxAltList.Items.Count; i++)
-                        {
-                            dtgrdwMatrix.Rows[i].HeaderCell.Value = "z" + (i + 1).ToString();
-                            dtgrdwMatrix.Columns[i].HeaderText = "z" + (i + 1).ToString();
-                            int buf = lstbxAltList.Items[i].ToString().IndexOf("]", StringComparison.Ordinal);
-                            int ind = int.Parse(lstbxAltList.Items[i].ToString().Substring(1, buf - 1));
-                            if (ind > k)
-                            {
-                                //для изменения нумерации при удалении
-                                lstbxAltList.Items[i] = "[" + (ind - 1).ToString() + "] " +
-                                                        lstbxAltList.Items[i].ToString().Remove(0, buf + 2);
-                            }
-                        }
-                    }
-                }
-            }
-            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
-                {
-                    if ((lstbxAltList.Items.Count != 0) && (lstbxAltList.SelectedIndex != -1))
-                    {
-                        int ch = lstbxAltList.SelectedItem.ToString().IndexOf("]");
-                        int k = int.Parse(lstbxAltList.SelectedItem.ToString().Substring(1, ch - 1));
-
-                        dtgrdwMatrix.Columns.RemoveAt(k - 1);
-                        lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);
-                        for (int i = 0; i < lstbxAltList.Items.Count; i++)
-                        {
-                            dtgrdwMatrix.Columns[i].HeaderText = "z" + (i + 1).ToString();
-                            int buf = lstbxAltList.Items[i].ToString().IndexOf("]", StringComparison.Ordinal);
-                            int ind = int.Parse(lstbxAltList.Items[i].ToString().Substring(1, buf - 1));
-                            if (ind > k)
-                            {
-                                //для изменения нумерации при удалении
-                                lstbxAltList.Items[i] = "[" + (ind - 1).ToString() + "] " +
-                                                        lstbxAltList.Items[i].ToString().Remove(0, buf + 2);
-                            }
-                        }
+                        //для изменения нумерации при удалении
+                        lstbxAltList.Items[i] = "[" + (ind - 1).ToString() + "] " +
+                                                lstbxAltList.Items[i].ToString().Remove(0, buf + 2);
                     }
                 }
             }
@@ -396,8 +398,14 @@ namespace SisAn
 
         private void Del_All_Click(object sender, EventArgs e) //очистить все
         {   
-            dtgrdwMatrix.Rows.Clear();
-            dtgrdwMatrix.Columns.Clear();
+            dtgrdwMatrix1.Rows.Clear();
+            dtgrdwMatrix1.Columns.Clear();
+            dtgrdwMatrix2.Rows.Clear();
+            dtgrdwMatrix2.Columns.Clear();
+            dtgrdwMatrix3.Rows.Clear();
+            dtgrdwMatrix3.Columns.Clear();
+            dtgrdwMatrix4.Rows.Clear();
+            dtgrdwMatrix4.Columns.Clear();
             lstbxAltList.Items.Clear();
             load = false;
             switch (tabControl1.SelectedIndex)
@@ -438,52 +446,87 @@ namespace SisAn
             if (tabControl1.SelectedIndex == 0)
             {
 
-                dtgrdwMatrix[e.RowIndex, e.ColumnIndex].Value =
-                    (1.0 - Convert.ToSingle(dtgrdwMatrix[e.ColumnIndex, e.RowIndex].Value));
+                dtgrdwMatrix1[e.RowIndex, e.ColumnIndex].Value =
+                    (1.0 - Convert.ToSingle(dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value));
                 check();
             }
         }
 
         private void матрицаПредпочтенийToolStripMenuItem1_Click(object sender, EventArgs e) //сохранение МП
         {
-            if (tabControl1.SelectedIndex == 0)
+            switch (tabControl1.SelectedIndex)
             {
+                case 0:
                 {
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         string Out = string.Empty;
-                        for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
+                        for (int i = 0; i < dtgrdwMatrix1.Rows.Count; i++)
                         {
-                            for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
+                            for (int j = 0; j < dtgrdwMatrix1.Columns.Count; j++)
                             {
                                 if (i == j)
                                     Out += "_\t";
                                 else
-                                    Out += dtgrdwMatrix[j, i].Value + "\t";
+                                    Out += dtgrdwMatrix1[j, i].Value + "\t";
                             }
                             Out += "\n";
                         }
                         File.WriteAllText(saveFileDialog1.FileName, Out);
                     }
                 }
-            }
-            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
+                    break;
+                case 1:
+                    {
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            string Out = string.Empty;
+                            for (int i = 0; i < dtgrdwMatrix2.Rows.Count; i++)
+                            {
+                                for (int j = 0; j < dtgrdwMatrix2.Columns.Count; j++)
+                                {
+                                    Out += dtgrdwMatrix2[j, i].Value + "\t";
+                                }
+                                Out += "\n";
+                            }
+                            File.WriteAllText(saveFileDialog1.FileName, Out);
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            string Out = string.Empty;
+                            for (int i = 0; i < dtgrdwMatrix3.Rows.Count; i++)
+                            {
+                                for (int j = 0; j < dtgrdwMatrix3.Columns.Count; j++)
+                                {
+                                    Out += dtgrdwMatrix3[j, i].Value + "\t";
+                                }
+                                Out += "\n";
+                            }
+                            File.WriteAllText(saveFileDialog1.FileName, Out);
+                        }
+                    }
+                    break;
+                case 3:
                 {
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         string Out = string.Empty;
-                        for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
+                        for (int i = 0; i < dtgrdwMatrix4.Rows.Count; i++)
                         {
-                            for (int j = 0; j < dtgrdwMatrix.Columns.Count; j++)
+                            for (int j = 0; j < dtgrdwMatrix4.Columns.Count; j++)
                             {
-                                Out += dtgrdwMatrix[j, i].Value + "\t";
+                                Out += dtgrdwMatrix4[j, i].Value + "\t";
                             }
                             Out += "\n";
                         }
                         File.WriteAllText(saveFileDialog1.FileName, Out);
                     }
                 }
+                    break;
             }
         }
 
@@ -503,120 +546,104 @@ namespace SisAn
 
         private void альтернативаToolStripMenuItem_Click(object sender, EventArgs e) //загрузка из файла
         {
-            if (tabControl1.SelectedIndex == 0)
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                string[] alts = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
+                if ((dtgrdwMatrix1.Rows.Count != 0) && (dtgrdwMatrix1.Rows.Count != alts.Length))
                 {
-                    if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        string[] alts = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
-                        if ((dtgrdwMatrix.Rows.Count != 0) && (dtgrdwMatrix.Rows.Count != alts.Length))
-                        {
-                            MessageBox.Show("Несовпадение по размеру", "Ошибка");
-                            return;
-                        }
-                        int pos = 0;
-                        dtgrdwMatrix.Rows.Clear();
+                    MessageBox.Show("Несовпадение по размеру", "Ошибка");
+                    return;
+                }
+                int pos = 0;
+                dtgrdwMatrix1.Rows.Clear();
 
+                for (int i = 0; i < alts.Length; i++)
+                {
+                    dtgrdwMatrix1.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                }
+
+                dtgrdwMatrix1.Rows.Add(alts.Length);
+                if (!load)
+                {
+                    for (int j = 0; j < alts.Length; j++)
+                    {
+                        dtgrdwMatrix1.Rows[j].HeaderCell.Value = "z" + (j + 1).ToString();
                         for (int i = 0; i < alts.Length; i++)
                         {
-                            dtgrdwMatrix.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
-                        }
-
-                        dtgrdwMatrix.Rows.Add(alts.Length);
-                        if (!load)
-                        {
-                            for (int j = 0; j < alts.Length; j++)
+                            if (j == i)
                             {
-                                dtgrdwMatrix.Rows[j].HeaderCell.Value = "z" + (j + 1).ToString();
-                                for (int i = 0; i < alts.Length; i++)
-                                {
-                                    if (j == i)
-                                    {
-                                        dtgrdwMatrix[i, i].Style.BackColor = Color.Aqua;
-                                        dtgrdwMatrix[j, i].ReadOnly = true;
-                                    }
-                                    else
-                                    {
-                                        dtgrdwMatrix[j, i].Value = "0";
-                                        dtgrdwMatrix[i, j].Value = "1";
-                                    }
-                                }
+                                dtgrdwMatrix1[i, i].Style.BackColor = Color.Aqua;
+                                dtgrdwMatrix1[j, i].ReadOnly = true;
+                            }
+                            else
+                            {
+                                dtgrdwMatrix1[j, i].Value = "0";
+                                dtgrdwMatrix1[i, j].Value = "1";
                             }
                         }
-                        load = true;
-                        lstbxAltList.Items.Clear();
-                        for (int i = 1; i <= alts.Length; i++)
-                        {
-                            alts[i - 1] = "[" + i.ToString() + "] " + alts[i - 1];
-                        }
-                        lstbxAltList.Items.AddRange(alts);
                     }
                 }
-            }
-            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
+                load = true;  
+                //для 2,3,4 метода
+                dtgrdwMatrix2.Rows.Clear();
+                dtgrdwMatrix3.Rows.Clear();
+                dtgrdwMatrix4.Rows.Clear();
+                for (int i = 0; i < alts.Length; i++)
                 {
-                    if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        string[] alts = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
-                        int pos = 0;
-                        dtgrdwMatrix.Rows.Clear();
-
-                        for (int i = 0; i < alts.Length; i++)
-                        {
-                            dtgrdwMatrix.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
-                        }
-                        load = true;
-                        lstbxAltList.Items.Clear();
-                        for (int i = 1; i <= alts.Length; i++)
-                        {
-                            alts[i - 1] = "[" + i.ToString() + "] " + alts[i - 1];
-                        }
-                        lstbxAltList.Items.AddRange(alts);
-                    }
+                    dtgrdwMatrix2.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                    dtgrdwMatrix3.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                    dtgrdwMatrix4.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
                 }
-            }
+                
+                lstbxAltList.Items.Clear();
+                for (int i = 1; i <= alts.Length; i++)
+                {
+                    alts[i - 1] = "[" + i.ToString() + "] " + alts[i - 1];
+                }
+                lstbxAltList.Items.AddRange(alts);
+            }  
         }
 
         private void матрицаПредпочтенийToolStripMenuItem_Click(object sender, EventArgs e) //загрузка
         {
-            if (tabControl1.SelectedIndex == 0)
+            switch (tabControl1.SelectedIndex)
             {
+                case 0:
                 {
                     if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         string[] str = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
-                        if ((dtgrdwMatrix.Rows.Count != 0) && (dtgrdwMatrix.Rows.Count != str.Length))
+                        if ((dtgrdwMatrix1.Rows.Count != 0) && (dtgrdwMatrix1.Rows.Count != str.Length))
                         {
                             MessageBox.Show("Несовпадение по размеру", "Ошибка");
                             return;
                         }
                         int pos = 0;
-                        dtgrdwMatrix.Rows.Clear();
-                        dtgrdwMatrix.Columns.Clear();
+                        dtgrdwMatrix1.Rows.Clear();
+                        dtgrdwMatrix1.Columns.Clear();
                         string[] c = new string[str.Length];
                         for (int i = 0; i < c.Length; i++)
                             c[i] = "[" + (i + 1).ToString() + "] ";
 
                         for (int i = 0; i < str.Length; i++)
                         {
-                            dtgrdwMatrix.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                            dtgrdwMatrix1.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
                         }
 
-                        dtgrdwMatrix.Rows.Add(str.Length);
+                        dtgrdwMatrix1.Rows.Add(str.Length);
 
-                        for (int i = 0; i < dtgrdwMatrix.RowCount; i++)
+                        for (int i = 0; i < dtgrdwMatrix1.RowCount; i++)
                         {
                             string[] buf = str[i].Split('\t');
-                            for (int j = 0; j < dtgrdwMatrix.ColumnCount; j++)
+                            for (int j = 0; j < dtgrdwMatrix1.ColumnCount; j++)
                             {
-                                dtgrdwMatrix[j, i].Value = buf[j];
+                                dtgrdwMatrix1[j, i].Value = buf[j];
                                 pos++;
                                 if (i == j)
                                 {
-                                    dtgrdwMatrix[i, i].Value = "";
-                                    dtgrdwMatrix[i, i].ReadOnly = true;
-                                    dtgrdwMatrix[i, i].Style.BackColor = Color.Aqua;
+                                    dtgrdwMatrix1[i, i].Value = "";
+                                    dtgrdwMatrix1[i, i].ReadOnly = true;
+                                    dtgrdwMatrix1[i, i].Style.BackColor = Color.Aqua;
                                 }
                             }
                         }
@@ -628,36 +655,94 @@ namespace SisAn
                         load = true;
                     }
                 }
-            }
-            else if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
-            {
+                    break;
+                case 1:
+                    {
+                        if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            string[] str = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
+                            int pos = 0;
+                            dtgrdwMatrix2.Rows.Clear();
+                            dtgrdwMatrix2.Columns.Clear();
+                            string[] buf = str[0].Split('\t');
+                            for (int i = 0; i < buf.Length; i++)
+                            {
+                                dtgrdwMatrix2.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                            }
+
+                            dtgrdwMatrix2.Rows.Add(str.Length);
+                            for (int i = 0; i < str.Length; i++)
+                            {
+                                buf = str[i].Split('\t');
+                                for (int j = 0; j < buf.Length; j++)
+                                {
+                                    dtgrdwMatrix2[j, i].Value = buf[j];
+                                    pos++;
+                                    dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                                }
+                            }
+                            load = true;
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            string[] str = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
+                            int pos = 0;
+                            dtgrdwMatrix3.Rows.Clear();
+                            dtgrdwMatrix3.Columns.Clear();
+                            string[] buf = str[0].Split('\t');
+                            for (int i = 0; i < buf.Length; i++)
+                            {
+                                dtgrdwMatrix3.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                            }
+
+                            dtgrdwMatrix3.Rows.Add(str.Length);
+                            for (int i = 0; i < str.Length; i++)
+                            {
+                                buf = str[i].Split('\t');
+                                for (int j = 0; j < buf.Length; j++)
+                                {
+                                    dtgrdwMatrix3[j, i].Value = buf[j];
+                                    pos++;
+                                    dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                                }
+                            }
+                            load = true;
+                        }
+                    }
+                    break;
+                case 3:
                 {
                     if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         string[] str = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
                         int pos = 0;
-                        dtgrdwMatrix.Rows.Clear();
-                        dtgrdwMatrix.Columns.Clear();
+                        dtgrdwMatrix4.Rows.Clear();
+                        dtgrdwMatrix4.Columns.Clear();
                         string[] buf = str[0].Split('\t');
                         for (int i = 0; i < buf.Length; i++)
                         {
-                            dtgrdwMatrix.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
+                            dtgrdwMatrix4.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
                         }
 
-                        dtgrdwMatrix.Rows.Add(str.Length);
+                        dtgrdwMatrix4.Rows.Add(str.Length);
                         for (int i = 0; i < str.Length; i++)
                         {
                             buf = str[i].Split('\t');
                             for (int j = 0; j < buf.Length; j++)
                             {
-                                dtgrdwMatrix[j, i].Value = buf[j];
+                                dtgrdwMatrix4[j, i].Value = buf[j];
                                 pos++;
-                                dtgrdwMatrix.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                                dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                             }
                         }
                         load = true;
                     }
                 }
+                    break;
             }
         }
 
@@ -683,12 +768,15 @@ namespace SisAn
         {
             if (txtAddExp.Text != "" && txtAddEval.Text != "")
             {
-
                 dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);
                 txtAddExp.Text = "";
                 txtAddEval.Text = "";
-                dtgrdwMatrix.Rows.Add();
-                dtgrdwMatrix.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                dtgrdwMatrix2.Rows.Add();
+                dtgrdwMatrix2.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                dtgrdwMatrix3.Rows.Add();
+                dtgrdwMatrix3.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                dtgrdwMatrix4.Rows.Add();
+                dtgrdwMatrix4.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
             }
         }
 
@@ -714,11 +802,15 @@ namespace SisAn
         {
             if ((dtgrdwExp.Rows.Count != 0) && (dtgrdwExp.SelectedRows.Count != 0))
             {
-                dtgrdwMatrix.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
+                dtgrdwMatrix2.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
+                dtgrdwMatrix3.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
+                dtgrdwMatrix4.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
                 dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
                 for (int i = 0; i < dtgrdwExp.Rows.Count; i++)
                 {
-                    dtgrdwMatrix.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                    dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                    dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                    dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                 }
             }
 
@@ -726,8 +818,11 @@ namespace SisAn
         
         private void списокЭкспертовToolStripMenuItem1_Click(object sender, EventArgs e) //загрузка списка экспертов
         {
-            if (tabControl1.SelectedIndex == 1 || tabControl1.SelectedIndex == 2 || tabControl1.SelectedIndex == 3)
+            switch (tabControl1.SelectedIndex)
             {
+                case 1:
+                case 2:
+                case 3:
                 {
                     if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
@@ -761,12 +856,17 @@ namespace SisAn
                         load = true;
                         //для матрицы
                         int posit = 0;
-                        dtgrdwMatrix.Rows.Clear();
-
-                        dtgrdwMatrix.Rows.Add(alts.Length);
+                        dtgrdwMatrix2.Rows.Clear();
+                        dtgrdwMatrix3.Rows.Clear();
+                        dtgrdwMatrix4.Rows.Clear();
+                        dtgrdwMatrix2.Rows.Add(alts.Length);
+                        dtgrdwMatrix3.Rows.Add(alts.Length);
+                        dtgrdwMatrix4.Rows.Add(alts.Length);
                         for (int i = 0; i < alts.Length; i++)
                         {
-                            dtgrdwMatrix.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                            dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                            dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                            dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                         }
 
                         if (!load)
@@ -775,12 +875,15 @@ namespace SisAn
                             {
                                 for (int i = 0; i < alts.Length; i++)
                                 {
-                                    dtgrdwMatrix[j, i].Value = "";
+                                    dtgrdwMatrix2[j, i].Value = "";
+                                    dtgrdwMatrix3[j, i].Value = "";
+                                    dtgrdwMatrix4[j, i].Value = "";
                                 }
                             }
                         }
                     }
                 }
+                    break;
             }
         }
 
@@ -789,6 +892,8 @@ namespace SisAn
             switch (tabControl1.SelectedIndex)
             {
                 case 1:
+                case 2:
+                case 3:
                     {
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
@@ -833,7 +938,7 @@ namespace SisAn
 
         }
 
-        private void dtgrdwMatrix_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        /*private void dtgrdwMatrix_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             for (int i = 0; i < dtgrdwMatrix.Rows.Count; i++)
             {
@@ -862,7 +967,7 @@ namespace SisAn
 
             }
             return;
-        }
+        }*/
 
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
