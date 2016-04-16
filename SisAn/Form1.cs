@@ -396,6 +396,8 @@ namespace SisAn
                     dtgrdwMatrix4.Rows[ind3].HeaderCell.Value = "Э" + (ind3 + 1).ToString();
                     ind3++;
                 }
+                //добавляется 5 метод
+
             }
         }
 
@@ -800,8 +802,11 @@ namespace SisAn
 
         private void btnEditing_Click(object sender, EventArgs e) //редактирование альтернативы
         {
-            lstbxAltList.Items[lstbxAltList.SelectedIndex] = lstbxAltList.SelectedItem.ToString().Substring(0, 4) +
-                                                             txtbxEditing.Text;
+            if (txtbxEditing.Text != "")
+            {
+                lstbxAltList.Items[lstbxAltList.SelectedIndex] = lstbxAltList.SelectedItem.ToString().Substring(0, 4) +
+                                                                 txtbxEditing.Text;
+            }
             txtbxEditing.Text = "";
         }
 
@@ -878,14 +883,14 @@ namespace SisAn
 
         private void del_exp_Click(object sender, EventArgs e) //удаление эксперта
         {
-            if ((dtgrdwExp.Rows.Count != 0) && (dtgrdwExp.SelectedRows.Count != 0)&&_expCount!=0)
+            if (lstbxAltList.Items.Count != 0)
             {
                 _expCount--;
                 //выпиливаем из матриц строки
-                dtgrdwMatrix2.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
-                dtgrdwMatrix3.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
-                dtgrdwMatrix4.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
-                dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);//из списка экспертов
+                dtgrdwMatrix2.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
+                dtgrdwMatrix3.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
+                dtgrdwMatrix4.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
+                dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);//из списка экспертов
                 for (int i = 0; i < dtgrdwExp.Rows.Count; i++)
                 {
                     dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
