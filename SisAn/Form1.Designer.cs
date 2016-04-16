@@ -110,7 +110,7 @@
             this.очиститьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1115, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1204, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -207,17 +207,18 @@
             // 
             // btnSort
             // 
+            this.btnSort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnSort.Location = new System.Drawing.Point(968, 277);
             this.btnSort.Name = "btnSort";
-            this.btnSort.Size = new System.Drawing.Size(135, 60);
+            this.btnSort.Size = new System.Drawing.Size(224, 60);
             this.btnSort.TabIndex = 3;
             this.btnSort.Text = "Упорядочить";
-            this.btnSort.UseVisualStyleBackColor = true;
+            this.btnSort.UseVisualStyleBackColor = false;
             this.btnSort.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtbxAddAlt
             // 
-            this.txtbxAddAlt.Location = new System.Drawing.Point(13, 277);
+            this.txtbxAddAlt.Location = new System.Drawing.Point(13, 261);
             this.txtbxAddAlt.Multiline = true;
             this.txtbxAddAlt.Name = "txtbxAddAlt";
             this.txtbxAddAlt.Size = new System.Drawing.Size(301, 29);
@@ -225,47 +226,51 @@
             // 
             // btnAddAlt
             // 
-            this.btnAddAlt.Location = new System.Drawing.Point(322, 266);
+            this.btnAddAlt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnAddAlt.Location = new System.Drawing.Point(322, 250);
             this.btnAddAlt.Name = "btnAddAlt";
             this.btnAddAlt.Size = new System.Drawing.Size(100, 40);
             this.btnAddAlt.TabIndex = 7;
             this.btnAddAlt.Text = "Добавить альтернативу\r\n";
-            this.btnAddAlt.UseVisualStyleBackColor = true;
+            this.btnAddAlt.UseVisualStyleBackColor = false;
             this.btnAddAlt.Click += new System.EventHandler(this.Add_altern_Click);
             // 
             // btnDelAlt
             // 
-            this.btnDelAlt.Location = new System.Drawing.Point(428, 266);
+            this.btnDelAlt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnDelAlt.Location = new System.Drawing.Point(322, 202);
             this.btnDelAlt.Name = "btnDelAlt";
             this.btnDelAlt.Size = new System.Drawing.Size(100, 40);
             this.btnDelAlt.TabIndex = 8;
             this.btnDelAlt.Text = "Удалить альтернативу";
-            this.btnDelAlt.UseVisualStyleBackColor = true;
+            this.btnDelAlt.UseVisualStyleBackColor = false;
             this.btnDelAlt.Click += new System.EventHandler(this.Del_altern_Click);
             // 
             // btnDelAll
             // 
+            this.btnDelAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnDelAll.Location = new System.Drawing.Point(968, 82);
             this.btnDelAll.Name = "btnDelAll";
-            this.btnDelAll.Size = new System.Drawing.Size(135, 60);
+            this.btnDelAll.Size = new System.Drawing.Size(224, 60);
             this.btnDelAll.TabIndex = 9;
             this.btnDelAll.Text = "Очистить все\r\n";
-            this.btnDelAll.UseVisualStyleBackColor = true;
+            this.btnDelAll.UseVisualStyleBackColor = false;
             this.btnDelAll.Click += new System.EventHandler(this.Del_All_Click);
             // 
             // btnEditing
             // 
-            this.btnEditing.Location = new System.Drawing.Point(322, 314);
+            this.btnEditing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnEditing.Location = new System.Drawing.Point(322, 298);
             this.btnEditing.Name = "btnEditing";
             this.btnEditing.Size = new System.Drawing.Size(100, 40);
             this.btnEditing.TabIndex = 10;
             this.btnEditing.Text = "Редактировать";
-            this.btnEditing.UseVisualStyleBackColor = true;
+            this.btnEditing.UseVisualStyleBackColor = false;
             this.btnEditing.Click += new System.EventHandler(this.btnEditing_Click);
             // 
             // txtbxEditing
             // 
-            this.txtbxEditing.Location = new System.Drawing.Point(13, 325);
+            this.txtbxEditing.Location = new System.Drawing.Point(13, 309);
             this.txtbxEditing.Multiline = true;
             this.txtbxEditing.Name = "txtbxEditing";
             this.txtbxEditing.Size = new System.Drawing.Size(300, 28);
@@ -278,15 +283,16 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(551, 66);
+            this.tabControl1.Location = new System.Drawing.Point(535, 66);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(411, 495);
+            this.tabControl1.Size = new System.Drawing.Size(427, 520);
             this.tabControl1.TabIndex = 12;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.dtgrdwMatrix1);
@@ -294,21 +300,21 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(403, 469);
+            this.tabPage1.Size = new System.Drawing.Size(419, 494);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Метод парных сравнений";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // lstbxAltNewList
             // 
             this.lstbxAltNewList.FormattingEnabled = true;
-            this.lstbxAltNewList.Location = new System.Drawing.Point(0, 20);
+            this.lstbxAltNewList.Location = new System.Drawing.Point(6, 20);
             this.lstbxAltNewList.Name = "lstbxAltNewList";
-            this.lstbxAltNewList.Size = new System.Drawing.Size(301, 134);
+            this.lstbxAltNewList.Size = new System.Drawing.Size(321, 134);
             this.lstbxAltNewList.TabIndex = 13;
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.dtgrdwMatrix2);
@@ -316,21 +322,21 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(403, 469);
+            this.tabPage2.Size = new System.Drawing.Size(419, 494);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Метод взвешенных экспертных оценок";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // list_Alt_new
             // 
             this.list_Alt_new.FormattingEnabled = true;
-            this.list_Alt_new.Location = new System.Drawing.Point(3, 20);
+            this.list_Alt_new.Location = new System.Drawing.Point(6, 20);
             this.list_Alt_new.Name = "list_Alt_new";
-            this.list_Alt_new.Size = new System.Drawing.Size(301, 134);
+            this.list_Alt_new.Size = new System.Drawing.Size(321, 134);
             this.list_Alt_new.TabIndex = 22;
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.dtgrdwMatrix3);
@@ -338,21 +344,21 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(403, 469);
+            this.tabPage3.Size = new System.Drawing.Size(419, 494);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Метод предпочтений";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // listPredp
             // 
             this.listPredp.FormattingEnabled = true;
-            this.listPredp.Location = new System.Drawing.Point(3, 20);
+            this.listPredp.Location = new System.Drawing.Point(6, 20);
             this.listPredp.Name = "listPredp";
-            this.listPredp.Size = new System.Drawing.Size(301, 134);
+            this.listPredp.Size = new System.Drawing.Size(321, 134);
             this.listPredp.TabIndex = 23;
             // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage4.Controls.Add(this.label16);
             this.tabPage4.Controls.Add(this.label13);
             this.tabPage4.Controls.Add(this.dtgrdwMatrix4);
@@ -360,28 +366,27 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(403, 469);
+            this.tabPage4.Size = new System.Drawing.Size(419, 494);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Метод ранга";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // listRang
             // 
             this.listRang.FormattingEnabled = true;
-            this.listRang.Location = new System.Drawing.Point(0, 20);
+            this.listRang.Location = new System.Drawing.Point(6, 20);
             this.listRang.Name = "listRang";
-            this.listRang.Size = new System.Drawing.Size(301, 134);
+            this.listRang.Size = new System.Drawing.Size(321, 134);
             this.listRang.TabIndex = 23;
             // 
             // tabPage5
             // 
+            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(306, 141);
+            this.tabPage5.Size = new System.Drawing.Size(419, 494);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Полное попарное сопоставление";
-            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -395,7 +400,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(318, 24);
+            this.label2.Location = new System.Drawing.Point(449, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 6;
@@ -403,16 +408,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 40);
+            this.textBox1.Location = new System.Drawing.Point(10, 40);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(761, 20);
+            this.textBox1.Size = new System.Drawing.Size(952, 20);
             this.textBox1.TabIndex = 7;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 261);
+            this.label1.Location = new System.Drawing.Point(10, 245);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 13);
             this.label1.TabIndex = 39;
@@ -421,7 +426,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 309);
+            this.label5.Location = new System.Drawing.Point(11, 293);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(169, 13);
             this.label5.TabIndex = 40;
@@ -429,20 +434,21 @@
             // 
             // txtAddExp
             // 
-            this.txtAddExp.Location = new System.Drawing.Point(1, 163);
+            this.txtAddExp.Location = new System.Drawing.Point(2, 163);
             this.txtAddExp.Multiline = true;
             this.txtAddExp.Name = "txtAddExp";
-            this.txtAddExp.Size = new System.Drawing.Size(257, 26);
+            this.txtAddExp.Size = new System.Drawing.Size(271, 26);
             this.txtAddExp.TabIndex = 29;
             // 
             // add_exp
             // 
+            this.add_exp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.add_exp.Location = new System.Drawing.Point(416, 152);
             this.add_exp.Name = "add_exp";
             this.add_exp.Size = new System.Drawing.Size(100, 40);
             this.add_exp.TabIndex = 30;
             this.add_exp.Text = "Добавить эксперта\r\n";
-            this.add_exp.UseVisualStyleBackColor = true;
+            this.add_exp.UseVisualStyleBackColor = false;
             this.add_exp.Click += new System.EventHandler(this.add_exp_Click);
             // 
             // label6
@@ -456,18 +462,19 @@
             // 
             // del_exp
             // 
+            this.del_exp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.del_exp.Location = new System.Drawing.Point(416, 100);
             this.del_exp.Name = "del_exp";
             this.del_exp.Size = new System.Drawing.Size(100, 40);
             this.del_exp.TabIndex = 31;
             this.del_exp.Text = "Удалить эксперта";
-            this.del_exp.UseVisualStyleBackColor = true;
+            this.del_exp.UseVisualStyleBackColor = false;
             this.del_exp.Click += new System.EventHandler(this.del_exp_Click);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(265, 147);
+            this.label11.Location = new System.Drawing.Point(276, 147);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(134, 13);
             this.label11.TabIndex = 38;
@@ -475,17 +482,18 @@
             // 
             // edit_exp
             // 
-            this.edit_exp.Location = new System.Drawing.Point(268, 197);
+            this.edit_exp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.edit_exp.Location = new System.Drawing.Point(279, 201);
             this.edit_exp.Name = "edit_exp";
             this.edit_exp.Size = new System.Drawing.Size(100, 40);
             this.edit_exp.TabIndex = 27;
             this.edit_exp.Text = "Редактировать ";
-            this.edit_exp.UseVisualStyleBackColor = true;
+            this.edit_exp.UseVisualStyleBackColor = false;
             this.edit_exp.Click += new System.EventHandler(this.edit_exp_Click);
             // 
             // txtAddEval
             // 
-            this.txtAddEval.Location = new System.Drawing.Point(268, 163);
+            this.txtAddEval.Location = new System.Drawing.Point(279, 163);
             this.txtAddEval.Multiline = true;
             this.txtAddEval.Name = "txtAddEval";
             this.txtAddEval.ReadOnly = true;
@@ -504,10 +512,10 @@
             // 
             // txtExpEdit
             // 
-            this.txtExpEdit.Location = new System.Drawing.Point(2, 217);
+            this.txtExpEdit.Location = new System.Drawing.Point(2, 209);
             this.txtExpEdit.Multiline = true;
             this.txtExpEdit.Name = "txtExpEdit";
-            this.txtExpEdit.Size = new System.Drawing.Size(256, 32);
+            this.txtExpEdit.Size = new System.Drawing.Size(271, 29);
             this.txtExpEdit.TabIndex = 42;
             // 
             // label7
@@ -521,11 +529,12 @@
             // 
             // dtgrdwExp
             // 
+            this.dtgrdwExp.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtgrdwExp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrdwExp.Location = new System.Drawing.Point(0, 19);
             this.dtgrdwExp.Name = "dtgrdwExp";
             this.dtgrdwExp.ReadOnly = true;
-            this.dtgrdwExp.Size = new System.Drawing.Size(398, 121);
+            this.dtgrdwExp.Size = new System.Drawing.Size(409, 121);
             this.dtgrdwExp.TabIndex = 32;
             this.dtgrdwExp.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtgrdwExp_CellMouseDoubleClick);
             // 
@@ -542,9 +551,9 @@
             this.groupBox1.Controls.Add(this.edit_exp);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtAddEval);
-            this.groupBox1.Location = new System.Drawing.Point(14, 356);
+            this.groupBox1.Location = new System.Drawing.Point(13, 344);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(531, 265);
+            this.groupBox1.Size = new System.Drawing.Size(521, 244);
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             // 
@@ -561,12 +570,14 @@
             // 
             this.dtgrdwMatrix1.AllowUserToOrderColumns = true;
             this.dtgrdwMatrix1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtgrdwMatrix1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrdwMatrix1.Location = new System.Drawing.Point(6, 177);
             this.dtgrdwMatrix1.Name = "dtgrdwMatrix1";
             this.dtgrdwMatrix1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgrdwMatrix1.Size = new System.Drawing.Size(321, 261);
             this.dtgrdwMatrix1.TabIndex = 46;
+            this.dtgrdwMatrix1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // label8
             // 
@@ -581,6 +592,7 @@
             // 
             this.dtgrdwMatrix2.AllowUserToOrderColumns = true;
             this.dtgrdwMatrix2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtgrdwMatrix2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrdwMatrix2.Location = new System.Drawing.Point(6, 176);
             this.dtgrdwMatrix2.Name = "dtgrdwMatrix2";
@@ -601,8 +613,9 @@
             // 
             this.dtgrdwMatrix3.AllowUserToOrderColumns = true;
             this.dtgrdwMatrix3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtgrdwMatrix3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrix3.Location = new System.Drawing.Point(3, 176);
+            this.dtgrdwMatrix3.Location = new System.Drawing.Point(6, 173);
             this.dtgrdwMatrix3.Name = "dtgrdwMatrix3";
             this.dtgrdwMatrix3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgrdwMatrix3.Size = new System.Drawing.Size(321, 261);
@@ -611,7 +624,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(-3, 157);
+            this.label13.Location = new System.Drawing.Point(6, 157);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(102, 13);
             this.label13.TabIndex = 51;
@@ -621,8 +634,9 @@
             // 
             this.dtgrdwMatrix4.AllowUserToOrderColumns = true;
             this.dtgrdwMatrix4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtgrdwMatrix4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrix4.Location = new System.Drawing.Point(0, 176);
+            this.dtgrdwMatrix4.Location = new System.Drawing.Point(6, 173);
             this.dtgrdwMatrix4.Name = "dtgrdwMatrix4";
             this.dtgrdwMatrix4.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgrdwMatrix4.Size = new System.Drawing.Size(321, 261);
@@ -674,14 +688,15 @@
             "Метод ранга"});
             this.checkBox.Location = new System.Drawing.Point(968, 164);
             this.checkBox.Name = "checkBox";
-            this.checkBox.Size = new System.Drawing.Size(120, 94);
+            this.checkBox.Size = new System.Drawing.Size(224, 94);
             this.checkBox.TabIndex = 44;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 641);
+            this.BackColor = System.Drawing.Color.LightGreen;
+            this.ClientSize = new System.Drawing.Size(1204, 601);
             this.Controls.Add(this.checkBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
@@ -701,7 +716,7 @@
             this.Controls.Add(this.textBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Решение неструктурированных проблем методами экспертных оценок";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

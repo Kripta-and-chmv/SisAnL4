@@ -43,15 +43,15 @@ namespace SisAn
 
         private void button1_Click(object sender, EventArgs e) //сам алгоритм
         {
-           for (int ind = 0; ind < checkBox.Items.Count; ind++)
+           for (int ind = 0; ind < checkBox.Items.Count; ind++)//проходим по элементам чекбокса
                 {
                     switch (ind)
                     {
                         case 0:
                         {
-                            if (checkBox.GetItemChecked(ind))
+                            if (checkBox.GetItemChecked(ind))//если отмечен, то 1 алгоритм
                             {
-                                {
+                                
                                     int count = lstbxAltList.Items.Count;
                                     float[] C = new float[count];
                                     string[] sortedList = new string[count];
@@ -82,15 +82,13 @@ namespace SisAn
                                     lstbxAltNewList.Items.AddRange(sortedList);
                                 }
                             }
-                        }
+                        
                             break;
                         case 1:
                         {
-                            if (checkBox.GetItemChecked(ind))
+                            if (checkBox.GetItemChecked(ind))//если отмечен, то 2 алгоритм
                             {
-                                {
                                     float R = 0;
-
                                     int countExp = dtgrdwExp.Rows.Count;
                                     int countAlt = lstbxAltList.Items.Count;
                                     string[] sortedList = new string[countAlt];
@@ -124,13 +122,11 @@ namespace SisAn
                                     list_Alt_new.Items.AddRange(sortedList);
                                 }
                             }
-                        }
-                            break;
+                        break;
                     case 2:
                         {
-                            if (checkBox.GetItemChecked(ind))
+                            if (checkBox.GetItemChecked(ind))//если отмечен, то 3 алгоритм
                             {
-                                {
                                     int countExp = dtgrdwExp.Rows.Count;
                                     int countAlt = lstbxAltList.Items.Count;
                                     string[] sortedList = new string[countAlt];
@@ -168,13 +164,11 @@ namespace SisAn
                                     listPredp.Items.AddRange(sortedList);
                                 }
                             }
-                        }
-                            break;
+                        break;
                         case 3:
                         {
-                            if (checkBox.GetItemChecked(ind))
+                            if (checkBox.GetItemChecked(ind))//если отмечен, то 4 алгоритм
                             {
-                                {
                                     int countExp = dtgrdwExp.Rows.Count;
                                     int countAlt = lstbxAltList.Items.Count;
                                     string[] sortedList = new string[countAlt];
@@ -212,8 +206,7 @@ namespace SisAn
                                     listRang.Items.AddRange(sortedList);
                                 }
                             }
-                        }
-                            break;
+                        break;
                     }             
                 }
         }
@@ -334,7 +327,7 @@ namespace SisAn
 
         private void Add_altern_Click(object sender, EventArgs e) //добавить альтернативу
         {
-            ///////////////////////////////////////////////////
+            //добавляется в 1 метод
             if (txtbxAddAlt.Text != "")
             {
                 lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
@@ -360,19 +353,18 @@ namespace SisAn
                     }
                 }
 
-                /////////////////////////////////////
+                //добавляется во второй метод
                
                 dtgrdwMatrix2.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
-                //////////////////////////////////////        
+                //добавляется в третий метод     
                
                 dtgrdwMatrix3.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
-                //////////////////////////////////////////////////////////////////
+                //добавляется в четвертый метод
                 
                 dtgrdwMatrix4.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
-
             }
         }
 
@@ -382,12 +374,13 @@ namespace SisAn
             {
                 int ch = lstbxAltList.SelectedItem.ToString().IndexOf("]");
                 int k = int.Parse(lstbxAltList.SelectedItem.ToString().Substring(1, ch - 1));
+                //удаляются столбцы в матрицах
                 dtgrdwMatrix1.Rows.RemoveAt(k - 1);
                 dtgrdwMatrix1.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix2.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix3.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix4.Columns.RemoveAt(k - 1);
-                lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);
+                lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);//удаляется в списке альтернатив
                 for (int i = 0; i < lstbxAltList.Items.Count; i++)
                 {
                     dtgrdwMatrix1.Rows[i].HeaderCell.Value = "z" + (i + 1).ToString();
@@ -447,7 +440,7 @@ namespace SisAn
             }
         }
 
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e) //автоподстановка
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e) //автоподстановка для 1 метода
         {
             if (tabControl1.SelectedIndex == 0)
             {
@@ -752,15 +745,14 @@ namespace SisAn
             }
         }
 
-        private void btnEditing_Click(object sender, EventArgs e) //редактирование
+        private void btnEditing_Click(object sender, EventArgs e) //редактирование альтернативы
         {
             lstbxAltList.Items[lstbxAltList.SelectedIndex] = lstbxAltList.SelectedItem.ToString().Substring(0, 4) +
                                                              txtbxEditing.Text;
             txtbxEditing.Text = "";
         }
 
-        private void lstbxAltList_DoubleClick(object sender, EventArgs e)
-        //при двойном щелчке переместить в форму для редактирвоания
+        private void lstbxAltList_DoubleClick(object sender, EventArgs e)//при двойном щелчке переместить в форму для редактирвоания  
         {
             if (lstbxAltList.SelectedIndices.Count != 0)
             {
@@ -771,20 +763,19 @@ namespace SisAn
         #endregion
 
         private void add_exp_Click(object sender, EventArgs e) //добавить эксперта
-        {
-            
-            switch (tabControl1.SelectedIndex)
+        { 
+            switch (tabControl1.SelectedIndex)//для 2,3,4 
             {
-
                 case 1:
                 case 2:
                 case 3:
                 {
                     if (txtAddExp.Text != "" && txtAddEval.Text != "")
                     {
-                        dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);
+                        dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);//добавим в список экспертов
                         txtAddExp.Text = "";
                         txtAddEval.Text = "";
+                        //добавим строки в матрицы
                         dtgrdwMatrix2.Rows.Add();
                         dtgrdwMatrix2.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
                         dtgrdwMatrix3.Rows.Add();
@@ -807,7 +798,7 @@ namespace SisAn
         }
 
 
-        private void dtgrdwExp_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) //эксперта
+        private void dtgrdwExp_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) //при двойном щелчке переместить в форму для редактирования
         {
             if (dtgrdwExp.SelectedCells.Count != 0)
             {
@@ -819,10 +810,11 @@ namespace SisAn
         {
             if ((dtgrdwExp.Rows.Count != 0) && (dtgrdwExp.SelectedRows.Count != 0))
             {
+                //выпиливаем из матриц строки
                 dtgrdwMatrix2.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
                 dtgrdwMatrix3.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
                 dtgrdwMatrix4.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
-                dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
+                dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);//из списка экспертов
                 for (int i = 0; i < dtgrdwExp.Rows.Count; i++)
                 {
                     dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
@@ -987,7 +979,7 @@ namespace SisAn
         }*/
 
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)//видимость элементов
         {
             if (tabControl1.SelectedIndex == 0)
                 groupBox1.Visible = false;
