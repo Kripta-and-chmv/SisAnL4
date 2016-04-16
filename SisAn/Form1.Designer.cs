@@ -51,12 +51,24 @@
             this.txtbxEditing = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dtgrdwMatrix1 = new System.Windows.Forms.DataGridView();
             this.lstbxAltNewList = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dtgrdwMatrix2 = new System.Windows.Forms.DataGridView();
             this.list_Alt_new = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dtgrdwMatrix3 = new System.Windows.Forms.DataGridView();
             this.listPredp = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dtgrdwMatrix4 = new System.Windows.Forms.DataGridView();
             this.listRang = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
@@ -76,31 +88,24 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dtgrdwExp = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.dtgrdwMatrix1 = new System.Windows.Forms.DataGridView();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dtgrdwMatrix2 = new System.Windows.Forms.DataGridView();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dtgrdwMatrix3 = new System.Windows.Forms.DataGridView();
-            this.label13 = new System.Windows.Forms.Label();
-            this.dtgrdwMatrix4 = new System.Windows.Forms.DataGridView();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.checkBox = new System.Windows.Forms.CheckedListBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.listPar = new System.Windows.Forms.ListBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix2)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix3)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix4)).BeginInit();
+            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrdwExp)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix4)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -304,6 +309,37 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Метод парных сравнений";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 4);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(166, 13);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "Итоговый список альтернатив:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 158);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Исходная матрица";
+            // 
+            // dtgrdwMatrix1
+            // 
+            this.dtgrdwMatrix1.AllowUserToOrderColumns = true;
+            this.dtgrdwMatrix1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dtgrdwMatrix1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgrdwMatrix1.Location = new System.Drawing.Point(6, 177);
+            this.dtgrdwMatrix1.Name = "dtgrdwMatrix1";
+            this.dtgrdwMatrix1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dtgrdwMatrix1.Size = new System.Drawing.Size(321, 261);
+            this.dtgrdwMatrix1.TabIndex = 46;
+            this.dtgrdwMatrix1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
             // lstbxAltNewList
             // 
             this.lstbxAltNewList.FormattingEnabled = true;
@@ -325,6 +361,36 @@
             this.tabPage2.Size = new System.Drawing.Size(419, 494);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Метод взвешенных экспертных оценок";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(166, 13);
+            this.label4.TabIndex = 50;
+            this.label4.Text = "Итоговый список альтернатив:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 157);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(102, 13);
+            this.label8.TabIndex = 49;
+            this.label8.Text = "Исходная матрица";
+            // 
+            // dtgrdwMatrix2
+            // 
+            this.dtgrdwMatrix2.AllowUserToOrderColumns = true;
+            this.dtgrdwMatrix2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dtgrdwMatrix2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgrdwMatrix2.Location = new System.Drawing.Point(6, 176);
+            this.dtgrdwMatrix2.Name = "dtgrdwMatrix2";
+            this.dtgrdwMatrix2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dtgrdwMatrix2.Size = new System.Drawing.Size(321, 261);
+            this.dtgrdwMatrix2.TabIndex = 48;
             // 
             // list_Alt_new
             // 
@@ -348,6 +414,36 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Метод предпочтений";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 3);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(166, 13);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "Итоговый список альтернатив:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(0, 157);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(102, 13);
+            this.label12.TabIndex = 51;
+            this.label12.Text = "Исходная матрица";
+            // 
+            // dtgrdwMatrix3
+            // 
+            this.dtgrdwMatrix3.AllowUserToOrderColumns = true;
+            this.dtgrdwMatrix3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dtgrdwMatrix3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgrdwMatrix3.Location = new System.Drawing.Point(6, 173);
+            this.dtgrdwMatrix3.Name = "dtgrdwMatrix3";
+            this.dtgrdwMatrix3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dtgrdwMatrix3.Size = new System.Drawing.Size(321, 261);
+            this.dtgrdwMatrix3.TabIndex = 50;
+            // 
             // listPredp
             // 
             this.listPredp.FormattingEnabled = true;
@@ -370,6 +466,36 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Метод ранга";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 4);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(166, 13);
+            this.label16.TabIndex = 52;
+            this.label16.Text = "Итоговый список альтернатив:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 157);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(102, 13);
+            this.label13.TabIndex = 51;
+            this.label13.Text = "Исходная матрица";
+            // 
+            // dtgrdwMatrix4
+            // 
+            this.dtgrdwMatrix4.AllowUserToOrderColumns = true;
+            this.dtgrdwMatrix4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtgrdwMatrix4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dtgrdwMatrix4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgrdwMatrix4.Location = new System.Drawing.Point(6, 173);
+            this.dtgrdwMatrix4.Name = "dtgrdwMatrix4";
+            this.dtgrdwMatrix4.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dtgrdwMatrix4.Size = new System.Drawing.Size(321, 261);
+            this.dtgrdwMatrix4.TabIndex = 50;
+            // 
             // listRang
             // 
             this.listRang.FormattingEnabled = true;
@@ -381,6 +507,10 @@
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tabPage5.Controls.Add(this.tabControl2);
+            this.tabPage5.Controls.Add(this.label18);
+            this.tabPage5.Controls.Add(this.label17);
+            this.tabPage5.Controls.Add(this.listPar);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -557,127 +687,6 @@
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 158);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 13);
-            this.label9.TabIndex = 47;
-            this.label9.Text = "Исходная матрица";
-            // 
-            // dtgrdwMatrix1
-            // 
-            this.dtgrdwMatrix1.AllowUserToOrderColumns = true;
-            this.dtgrdwMatrix1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dtgrdwMatrix1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dtgrdwMatrix1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrix1.Location = new System.Drawing.Point(6, 177);
-            this.dtgrdwMatrix1.Name = "dtgrdwMatrix1";
-            this.dtgrdwMatrix1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtgrdwMatrix1.Size = new System.Drawing.Size(321, 261);
-            this.dtgrdwMatrix1.TabIndex = 46;
-            this.dtgrdwMatrix1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 157);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(102, 13);
-            this.label8.TabIndex = 49;
-            this.label8.Text = "Исходная матрица";
-            // 
-            // dtgrdwMatrix2
-            // 
-            this.dtgrdwMatrix2.AllowUserToOrderColumns = true;
-            this.dtgrdwMatrix2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dtgrdwMatrix2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dtgrdwMatrix2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrix2.Location = new System.Drawing.Point(6, 176);
-            this.dtgrdwMatrix2.Name = "dtgrdwMatrix2";
-            this.dtgrdwMatrix2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtgrdwMatrix2.Size = new System.Drawing.Size(321, 261);
-            this.dtgrdwMatrix2.TabIndex = 48;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(0, 157);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(102, 13);
-            this.label12.TabIndex = 51;
-            this.label12.Text = "Исходная матрица";
-            // 
-            // dtgrdwMatrix3
-            // 
-            this.dtgrdwMatrix3.AllowUserToOrderColumns = true;
-            this.dtgrdwMatrix3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dtgrdwMatrix3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dtgrdwMatrix3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrix3.Location = new System.Drawing.Point(6, 173);
-            this.dtgrdwMatrix3.Name = "dtgrdwMatrix3";
-            this.dtgrdwMatrix3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtgrdwMatrix3.Size = new System.Drawing.Size(321, 261);
-            this.dtgrdwMatrix3.TabIndex = 50;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 157);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(102, 13);
-            this.label13.TabIndex = 51;
-            this.label13.Text = "Исходная матрица";
-            // 
-            // dtgrdwMatrix4
-            // 
-            this.dtgrdwMatrix4.AllowUserToOrderColumns = true;
-            this.dtgrdwMatrix4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dtgrdwMatrix4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dtgrdwMatrix4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrdwMatrix4.Location = new System.Drawing.Point(6, 173);
-            this.dtgrdwMatrix4.Name = "dtgrdwMatrix4";
-            this.dtgrdwMatrix4.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtgrdwMatrix4.Size = new System.Drawing.Size(321, 261);
-            this.dtgrdwMatrix4.TabIndex = 50;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 4);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(166, 13);
-            this.label14.TabIndex = 48;
-            this.label14.Text = "Итоговый список альтернатив:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 4);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(166, 13);
-            this.label4.TabIndex = 50;
-            this.label4.Text = "Итоговый список альтернатив:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 3);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(166, 13);
-            this.label15.TabIndex = 52;
-            this.label15.Text = "Итоговый список альтернатив:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 4);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(166, 13);
-            this.label16.TabIndex = 52;
-            this.label16.Text = "Итоговый список альтернатив:";
-            // 
             // checkBox
             // 
             this.checkBox.FormattingEnabled = true;
@@ -685,11 +694,46 @@
             "Метод парных сравнений",
             "Метод взвешенных экспертных оценок",
             "Метод предпочтений",
-            "Метод ранга"});
+            "Метод ранга",
+            "Метод полного попарного сопоставления"});
             this.checkBox.Location = new System.Drawing.Point(968, 164);
             this.checkBox.Name = "checkBox";
             this.checkBox.Size = new System.Drawing.Size(224, 94);
             this.checkBox.TabIndex = 44;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 4);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(166, 13);
+            this.label17.TabIndex = 54;
+            this.label17.Text = "Итоговый список альтернатив:";
+            // 
+            // listPar
+            // 
+            this.listPar.FormattingEnabled = true;
+            this.listPar.Location = new System.Drawing.Point(6, 20);
+            this.listPar.Name = "listPar";
+            this.listPar.Size = new System.Drawing.Size(321, 134);
+            this.listPar.TabIndex = 53;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 162);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(109, 13);
+            this.label18.TabIndex = 55;
+            this.label18.Text = "Исходные матрицы:";
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Location = new System.Drawing.Point(10, 178);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(317, 310);
+            this.tabControl2.TabIndex = 56;
             // 
             // Form1
             // 
@@ -723,19 +767,21 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix3)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix4)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrdwExp)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrdwMatrix4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -804,6 +850,10 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckedListBox checkBox;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ListBox listPar;
     }
 }
 

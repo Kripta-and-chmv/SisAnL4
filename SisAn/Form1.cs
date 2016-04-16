@@ -23,7 +23,8 @@ namespace SisAn
          
 
         string[] el = { "0", "1", "0.5", "_" };
-
+        int _altCount=0;
+        int _expCount=0;
         bool load = false;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,7 +40,7 @@ namespace SisAn
            
         }
 
-        #region
+     
 
         private void button1_Click(object sender, EventArgs e) //сам алгоритм
         {
@@ -207,6 +208,14 @@ namespace SisAn
                                 }
                             }
                         break;
+                        case 4://если 5 алгоритм
+                        {
+                            if (checkBox.GetItemChecked(ind))
+                            {
+
+                            }
+                        }
+                            break;
                     }             
                 }
         }
@@ -330,6 +339,7 @@ namespace SisAn
             //добавляется в 1 метод
             if (txtbxAddAlt.Text != "")
             {
+                
                 lstbxAltList.Items.Add("[" + (lstbxAltList.Items.Count + 1).ToString() + "] " + txtbxAddAlt.Text);
                 txtbxAddAlt.Text = "";
                 dtgrdwMatrix1.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
@@ -357,14 +367,35 @@ namespace SisAn
                
                 dtgrdwMatrix2.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
+                int ind = 0;
+                while (_expCount != dtgrdwMatrix2.Rows.Count)//если добавляем альтернативы после добавления экспертов
+                {
+                    dtgrdwMatrix2.Rows.Add();
+                    dtgrdwMatrix2.Rows[ind].HeaderCell.Value = "Э" + (ind + 1).ToString();
+                    ind++;
+                }
                 //добавляется в третий метод     
                
                 dtgrdwMatrix3.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
+                int ind2 = 0;
+                while (_expCount != dtgrdwMatrix3.Rows.Count)//если добавляем альтернативы после добавления экспертов
+                {
+                    dtgrdwMatrix3.Rows.Add();
+                    dtgrdwMatrix3.Rows[ind2].HeaderCell.Value = "Э" + (ind2 + 1).ToString();
+                    ind2++;
+                }
                 //добавляется в четвертый метод
                 
                 dtgrdwMatrix4.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                     "z" + lstbxAltList.Items.Count.ToString());
+                int ind3 = 0;
+                while (_expCount != dtgrdwMatrix4.Rows.Count)//если добавляем альтернативы после добавления экспертов
+                {
+                    dtgrdwMatrix4.Rows.Add();
+                    dtgrdwMatrix4.Rows[ind3].HeaderCell.Value = "Э" + (ind3 + 1).ToString();
+                    ind3++;
+                }
             }
         }
 
@@ -411,6 +442,7 @@ namespace SisAn
             dtgrdwMatrix4.Rows.Clear();
             dtgrdwMatrix4.Columns.Clear();
             lstbxAltList.Items.Clear();
+            _expCount = 0;
             load = false;
             switch (tabControl1.SelectedIndex)
             {
@@ -600,6 +632,27 @@ namespace SisAn
                     alts[i - 1] = "[" + i.ToString() + "] " + alts[i - 1];
                 }
                 lstbxAltList.Items.AddRange(alts);
+                int ind = 0;
+                while (_expCount != dtgrdwMatrix2.Rows.Count)//если добавляем альтернативы после добавления экспертов
+                {
+                    dtgrdwMatrix2.Rows.Add();
+                    dtgrdwMatrix2.Rows[ind].HeaderCell.Value = "Э" + (ind + 1).ToString();
+                    ind++;
+                }
+                int ind2 = 0;
+                while (_expCount != dtgrdwMatrix3.Rows.Count)//если добавляем альтернативы после добавления экспертов
+                {
+                    dtgrdwMatrix3.Rows.Add();
+                    dtgrdwMatrix3.Rows[ind2].HeaderCell.Value = "Э" + (ind2 + 1).ToString();
+                    ind2++;
+                }
+                int ind3 = 0;
+                while (_expCount != dtgrdwMatrix4.Rows.Count)//если добавляем альтернативы после добавления экспертов
+                {
+                    dtgrdwMatrix4.Rows.Add();
+                    dtgrdwMatrix4.Rows[ind3].HeaderCell.Value = "Э" + (ind3 + 1).ToString();
+                    ind3++;
+                }
             }  
         }
 
@@ -760,7 +813,7 @@ namespace SisAn
             }
         }
 
-        #endregion
+
 
         private void add_exp_Click(object sender, EventArgs e) //добавить эксперта
         { 
@@ -772,16 +825,33 @@ namespace SisAn
                 {
                     if (txtAddExp.Text != "" && txtAddEval.Text != "")
                     {
+                        _expCount++;
                         dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);//добавим в список экспертов
                         txtAddExp.Text = "";
                         txtAddEval.Text = "";
                         //добавим строки в матрицы
-                        dtgrdwMatrix2.Rows.Add();
-                        dtgrdwMatrix2.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
-                        dtgrdwMatrix3.Rows.Add();
-                        dtgrdwMatrix3.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
-                        dtgrdwMatrix4.Rows.Add();
-                        dtgrdwMatrix4.Rows[dtgrdwExp.Rows.Count - 1].HeaderCell.Value = "Э" + dtgrdwExp.Rows.Count.ToString();
+                        if (lstbxAltList.Items.Count != 0)
+                        {
+                            dtgrdwMatrix2.Rows.Add();
+                            dtgrdwMatrix2.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
+                            dtgrdwMatrix3.Rows.Add();
+                            dtgrdwMatrix3.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
+                            dtgrdwMatrix4.Rows.Add();
+                            dtgrdwMatrix4.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
+                        }
+                    }
+                }
+                    break;
+                case 4:
+                {
+                    if (txtAddExp.Text != "" && txtAddEval.Text != "")
+                    {
+                        dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);//добавим в список экспертов
+                        txtAddExp.Text = "";
+                        txtAddEval.Text = "";
+                        TabPage newTabPage=new TabPage();
+                        tabControl2.TabPages.Add(newTabPage);
+                        DataGridView dtrdwView=new DataGridView();
                     }
                 }
                     break;
@@ -808,8 +878,9 @@ namespace SisAn
 
         private void del_exp_Click(object sender, EventArgs e) //удаление эксперта
         {
-            if ((dtgrdwExp.Rows.Count != 0) && (dtgrdwExp.SelectedRows.Count != 0))
+            if ((dtgrdwExp.Rows.Count != 0) && (dtgrdwExp.SelectedRows.Count != 0)&&_expCount!=0)
             {
+                _expCount--;
                 //выпиливаем из матриц строки
                 dtgrdwMatrix2.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
                 dtgrdwMatrix3.Rows.RemoveAt(dtgrdwExp.SelectedRows[0].Index);
@@ -854,32 +925,27 @@ namespace SisAn
                             {
                                 dtgrdwExp[j, i].Value = buf[j];
                                 pos++;
-                                dtgrdwExp.Rows[i].HeaderCell.Value = (i + 1).ToString();
                             }
+                            _expCount++;
                         }
-                        if (!load)
-                        {
-                            lstbxAltList.Items.Clear();
-                            lstbxAltList.Items.AddRange(c);
-                        }
-                        load = true;
-                        //для матрицы
+                      
                         int posit = 0;
-                        dtgrdwMatrix2.Rows.Clear();
-                        dtgrdwMatrix3.Rows.Clear();
-                        dtgrdwMatrix4.Rows.Clear();
-                        dtgrdwMatrix2.Rows.Add(alts.Length);
-                        dtgrdwMatrix3.Rows.Add(alts.Length);
-                        dtgrdwMatrix4.Rows.Add(alts.Length);
-                        for (int i = 0; i < alts.Length; i++)
+                        
+                       if (lstbxAltList.Items.Count != 0)//если уже добавлены альтернативы
                         {
-                            dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
-                            dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
-                            dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
-                        }
-
-                        if (!load)
-                        {
+                            dtgrdwMatrix2.Rows.Clear();
+                            dtgrdwMatrix3.Rows.Clear();
+                            dtgrdwMatrix4.Rows.Clear();
+                            
+                            for (int i = 0; i < _expCount; i++)
+                            {
+                                dtgrdwMatrix2.Rows.Add();
+                                dtgrdwMatrix3.Rows.Add();
+                                dtgrdwMatrix4.Rows.Add();
+                                dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                                dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                                dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                            }
                             for (int j = 0; j < alts.Length; j++)
                             {
                                 for (int i = 0; i < alts.Length; i++)
@@ -890,6 +956,8 @@ namespace SisAn
                                 }
                             }
                         }
+
+                       
                     }
                 }
                     break;
