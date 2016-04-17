@@ -212,6 +212,72 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))
                             {
+                                
+                                float[,] F = new float[_expCount, _altCount];
+                                float[,] _fi=new float[_expCount, _altCount];
+                                float[] V=new float[_altCount];
+                                string[] sortedList = new string[_altCount];
+                                for (int i = 0; i < _altCount; i++)
+                                {
+                                    sortedList[i] = lstbxAltList.Items[i].ToString();
+                                }
+                                int N = 0;
+
+                                for (int i = 0; i < _expCount; i++)
+                                {
+                                    for (int j = 0; j < _altCount; j++)
+                                    {
+                                        F[i, j] = 0;
+                                        _fi[i, j] = 0;
+                                    }
+                                }
+                                float number = 0;
+                                for (int i = 0; i < _expCount; i++)//подсчитали сумму в строках каждой матрицы
+                                {                           
+                                    for (int j = 0; j < _altCount; j++)
+                                    {
+                                       
+                                        for (int jj = 0; jj < myGrid[i].ColumnCount; jj++)
+                                        {
+                                            if (jj != j)
+                                            {
+                                                if (myGrid[i][jj, j].Value.ToString().Contains('/'))
+                                                {
+                                                    string[] numb = myGrid[i][jj, j].Value.ToString().Split('/');
+                                                    sizeSh.Text = numb[1].ToString();
+                                                    //дробь
+                                                    number = Convert.ToSingle(numb[0])/Convert.ToSingle(numb[1]);
+                                                }
+                                                else
+                                                    number = Convert.ToSingle(myGrid[i][jj, j].Value.ToString());
+                                                F[i, j] += number;
+
+                                            }
+                                        }
+                                    }
+                                }
+                                N = _altCount*(_altCount - 1);
+                                //определим нормированные оценки
+                                for (int i = 0; i < _expCount; i++)
+                                {
+                                    for (int j = 0; j < _altCount; j++)
+                                    {
+                                         _fi[i, j] = F[i,j]/N;
+
+                                    }
+                                }
+                                //найдем искомые веса альтернатив
+                                for (int i = 0; i < _expCount; i++)//подсчитали сумму в строках каждой матрицы
+                                {
+                                    for (int j = 0; j < _altCount; j++)
+                                    {
+                                        V[j] += _fi[i, j];
+
+                                    }
+                                }
+                                BubbleSort(V, sortedList); //сортируем
+                                listPar.Items.Clear();
+                                listPar.Items.AddRange(sortedList);
 
                             }
                         }
@@ -296,6 +362,11 @@ namespace SisAn
                             }
                         }
                     }
+                    break;
+                case 4:
+                {
+                    
+                }
                     break;
             }
         }
@@ -418,6 +489,7 @@ namespace SisAn
                         dg.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
                             "z" + lstbxAltList.Items.Count.ToString());
                         dg.Rows.Add();
+                        dg.Rows[_altCount-1].HeaderCell.Value = "Z" + _altCount.ToString();
                         dg.AllowUserToAddRows = false;
                         dg.AutoSize = true;
                         dg.AutoResizeColumns();
@@ -452,6 +524,7 @@ namespace SisAn
                     dtgrdwMatrix2.Columns[i].HeaderText = "z" + (i + 1).ToString();
                     dtgrdwMatrix3.Columns[i].HeaderText = "z" + (i + 1).ToString();
                     dtgrdwMatrix4.Columns[i].HeaderText = "z" + (i + 1).ToString();
+
                     foreach (var dg in myGrid)
                     {
                         dg.Columns[i].HeaderText="z" + (i + 1).ToString();
@@ -707,17 +780,20 @@ namespace SisAn
                     tabControl2.TabPages.Add(newTabPage); //добавим новую вкладку
                     DataGridView dtrdwView = new DataGridView(); //создадим на ней табличку
                     dtrdwView.AllowUserToAddRows = false;
-                    dtrdwView.Name = "dtrdwView" + _expCount.ToString();
+                    dtrdwView.Name = "dtrdwView" + _expCount.ToString();   
                     dtrdwView.Size = new Size(321, 261);
-                   dtrdwView.AutoResizeColumns();
+                   //dtrdwView.AutoResizeColumns();
                     //дадим ей имя, для удобства обращения к ней
                     myGrid.Add(dtrdwView);
                     newTabPage.Controls.Add(myGrid[i]);
                     for (int j = 0; j < _altCount; j++)
                     {
+                        
                         dtrdwView.Columns.Add("z" + (j+1).ToString(),
                             "z" + (j+1).ToString());
                         dtrdwView.Rows.Add();
+                        dtrdwView.Columns[j].Width = 40;
+                        dtrdwView.Rows[j].HeaderCell.Value = "z" + (j + 1).ToString();
                     }
                    
                     
@@ -881,6 +957,11 @@ namespace SisAn
                                 string[] buf = strings[j].Split('\t','\r');
                                 for (int jj = 0; jj < myGrid[i].ColumnCount; jj++)
                                 {
+                                    if(buf[jj].Contains('/'))//чтобы вывести размер шкалы
+                                    {
+                                        string[] numb = buf[jj].Split('/');
+                                        sizeSh.Text = numb[1].ToString();
+                                    }
                                     myGrid[i][jj, j].Value = buf[jj];
                                     myGrid[i].AutoResizeColumns();
                                     pos++;
@@ -928,13 +1009,41 @@ namespace SisAn
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     {
                         if (txtAddExp.Text != "" && txtAddEval.Text != "")
                         {
                             _expCount++;
                             dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);//добавим в список экспертов
+                            dtgrdwExp.Rows[_expCount-1].HeaderCell.Value = _expCount.ToString();
                             txtAddExp.Text = "";
                             txtAddEval.Text = "";
+                            //для 5 метода
+                            TabPage newTabPage = new TabPage();
+                            tabControl2.TabPages.Add(newTabPage); //добавим новую вкладку
+                            newTabPage.Text = "Э" + _expCount.ToString();
+                            DataGridView dtrdwView = new DataGridView(); //создадим на ней табличку
+
+                            dtrdwView.Name = "dtrdwView" + _expCount.ToString();
+                            dtrdwView.AllowUserToAddRows = false;
+                            dtrdwView.Size = new Size(321, 261);
+                            dtrdwView.AutoResizeColumns();
+                            int ind = 0;
+                            while (ind != _altCount)
+                            {
+                                dtrdwView.Columns.Add("z" + (ind+1).ToString(),
+                                    "z" + (ind+1).ToString());
+                                
+                                dtrdwView.Rows.Add();
+                                dtrdwView.Rows[ind].HeaderCell.Value = "Z" + (ind + 1).ToString();
+                                dtrdwView.Columns[ind].Width = 40;
+                                ind++;
+                            }
+                            //дадим ей имя, для удобства обращения к ней
+                            myGrid.Add(dtrdwView);
+
+                            newTabPage.Controls.Add(myGrid[_expCount - 1]);
+                            //для остальных методов
                             //добавим строки в матрицы
                             if (lstbxAltList.Items.Count != 0)
                             {
@@ -948,40 +1057,7 @@ namespace SisAn
                         }
                     }
                     break;
-                case 4:
-                    {
-                        if (txtAddExp.Text != "" && txtAddEval.Text != "")
-                        {
-                            _expCount++;
-                            dtgrdwExp.Rows.Add(txtAddExp.Text, txtAddEval.Text);//добавим в список экспертов
-                            txtAddExp.Text = "";
-                            txtAddEval.Text = "";
-
-                            TabPage newTabPage = new TabPage();
-                            tabControl2.TabPages.Add(newTabPage); //добавим новую вкладку
-                            DataGridView dtrdwView = new DataGridView(); //создадим на ней табличку
-
-                            dtrdwView.Name = "dtrdwView" + _expCount.ToString();
-                            dtrdwView.AllowUserToAddRows = false;
-                            dtrdwView.Size = new Size(321,261);
-                            dtrdwView.AutoResizeColumns();
-                            int ind = 0;
-                            while (ind != _altCount)
-                            {
-                                dtrdwView.Columns.Add("z" + ind,
-                                    "z" + ind);
-                                dtrdwView.Rows.Add();
-                                ind++;
-                            }
-                            //дадим ей имя, для удобства обращения к ней
-                            myGrid.Add(dtrdwView);
-
-                            newTabPage.Controls.Add(myGrid[_expCount - 1]);
-                          
-
-                        }
-                    }
-                    break;
+                
             }
         }
 
@@ -1013,9 +1089,12 @@ namespace SisAn
                 dtgrdwMatrix3.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
                 dtgrdwMatrix4.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
                 dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);//из списка экспертов
+                
                 tabControl2.TabPages.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
                 for (int i = 0; i < dtgrdwExp.Rows.Count; i++)
                 {
+                    dtgrdwExp.Rows[i].HeaderCell.Value = (i+1).ToString();
+                    tabControl2.TabPages[i].Text = "Э" + (i + 1).ToString();
                     dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                     dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                     dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
@@ -1043,13 +1122,16 @@ namespace SisAn
                             //для списка альтернатив
                             string[] c = new string[alts.Length];
                             for (int i = 0; i < c.Length; i++)
+                            {
                                 c[i] = "[" + (i + 1).ToString() + "] ";
+                            }
                             //для списка экспертов
                             dtgrdwExp.Columns.Add("exp", "Эксперт");
                             dtgrdwExp.Columns.Add("Eval", "Оценка");
                             dtgrdwExp.Rows.Add(alts.Length);
                             for (int i = 0; i < dtgrdwExp.RowCount; i++)
                             {
+                                dtgrdwExp.Rows[i].HeaderCell.Value = (i + 1).ToString();
                                 string[] buf = alts[i].Split('\t');
                                 for (int j = 0; j < dtgrdwExp.ColumnCount; j++)
                                 {
@@ -1070,6 +1152,7 @@ namespace SisAn
                                 for (int i = 0; i < _expCount; i++)
                                 {
                                     TabPage newTabPage = new TabPage();
+                                    newTabPage.Text = "Э" + (i + 1).ToString();
                                     tabControl2.TabPages.Add(newTabPage); //добавим новую вкладку
                                     DataGridView dtrdwView = new DataGridView(); //создадим на ней табличку
 
@@ -1088,6 +1171,8 @@ namespace SisAn
                                         dtrdwView.Columns.Add("z" + (ind+1).ToString(),
                                             "z" + (ind+1).ToString());
                                         dtrdwView.Rows.Add();
+                                        dtrdwView.Rows[ind].HeaderCell.Value = "z" + (ind + 1).ToString();
+                                        dtrdwView.Columns[ind].Width = 40;
                                         ind++;
                                     }
                                     dtgrdwMatrix2.Rows.Add();
@@ -1123,6 +1208,7 @@ namespace SisAn
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     {
                         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                         {
@@ -1209,6 +1295,8 @@ namespace SisAn
             }
 
         }
+
+       
 
 
     }

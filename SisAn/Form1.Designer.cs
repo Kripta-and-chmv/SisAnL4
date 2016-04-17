@@ -71,6 +71,12 @@
             this.dtgrdwMatrix4 = new System.Windows.Forms.DataGridView();
             this.listRang = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.sizeSh = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.listPar = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -89,10 +95,6 @@
             this.dtgrdwExp = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox = new System.Windows.Forms.CheckedListBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.listPar = new System.Windows.Forms.ListBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -507,6 +509,8 @@
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tabPage5.Controls.Add(this.sizeSh);
+            this.tabPage5.Controls.Add(this.label19);
             this.tabPage5.Controls.Add(this.tabControl2);
             this.tabPage5.Controls.Add(this.label18);
             this.tabPage5.Controls.Add(this.label17);
@@ -517,6 +521,56 @@
             this.tabPage5.Size = new System.Drawing.Size(419, 494);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Полное попарное сопоставление";
+            // 
+            // sizeSh
+            // 
+            this.sizeSh.Location = new System.Drawing.Point(330, 193);
+            this.sizeSh.Name = "sizeSh";
+            this.sizeSh.Size = new System.Drawing.Size(80, 20);
+            this.sizeSh.TabIndex = 58;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(327, 179);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(86, 13);
+            this.label19.TabIndex = 57;
+            this.label19.Text = "Размер шкалы:";
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Location = new System.Drawing.Point(10, 178);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(317, 310);
+            this.tabControl2.TabIndex = 56;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 162);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(109, 13);
+            this.label18.TabIndex = 55;
+            this.label18.Text = "Исходные матрицы:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 4);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(166, 13);
+            this.label17.TabIndex = 54;
+            this.label17.Text = "Итоговый список альтернатив:";
+            // 
+            // listPar
+            // 
+            this.listPar.FormattingEnabled = true;
+            this.listPar.Location = new System.Drawing.Point(6, 20);
+            this.listPar.Name = "listPar";
+            this.listPar.Size = new System.Drawing.Size(321, 134);
+            this.listPar.TabIndex = 53;
             // 
             // label3
             // 
@@ -701,40 +755,6 @@
             this.checkBox.Size = new System.Drawing.Size(224, 94);
             this.checkBox.TabIndex = 44;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 4);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(166, 13);
-            this.label17.TabIndex = 54;
-            this.label17.Text = "Итоговый список альтернатив:";
-            // 
-            // listPar
-            // 
-            this.listPar.FormattingEnabled = true;
-            this.listPar.Location = new System.Drawing.Point(6, 20);
-            this.listPar.Name = "listPar";
-            this.listPar.Size = new System.Drawing.Size(321, 134);
-            this.listPar.TabIndex = 53;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 162);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(109, 13);
-            this.label18.TabIndex = 55;
-            this.label18.Text = "Исходные матрицы:";
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Location = new System.Drawing.Point(10, 178);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(317, 310);
-            this.tabControl2.TabIndex = 56;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -854,6 +874,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ListBox listPar;
+        private System.Windows.Forms.TextBox sizeSh;
+        private System.Windows.Forms.Label label19;
     }
 }
 
