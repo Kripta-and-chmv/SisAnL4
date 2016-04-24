@@ -391,9 +391,12 @@
             this.dtgrdwMatrix2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrdwMatrix2.Location = new System.Drawing.Point(6, 176);
             this.dtgrdwMatrix2.Name = "dtgrdwMatrix2";
+            this.dtgrdwMatrix2.ReadOnly = true;
             this.dtgrdwMatrix2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgrdwMatrix2.Size = new System.Drawing.Size(321, 261);
             this.dtgrdwMatrix2.TabIndex = 48;
+            this.dtgrdwMatrix2.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtgrdwMatrix2_EditingControlShowing);
+            this.dtgrdwMatrix2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtgrdwMatrix2_KeyPress);
             // 
             // list_Alt_new
             // 

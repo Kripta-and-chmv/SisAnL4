@@ -15,18 +15,22 @@ namespace SisAn
 {
     public partial class Form1 : Form
     {
+
+
         public Form1()
         {
             InitializeComponent();
-
+           
         }
 
-
+        string buf = "";
         string[] el = { "0", "1", "0.5", "_" };
         int _altCount = 0;
         int _expCount = 0;
         bool load = false;
         List<DataGridView> myGrid = new List<DataGridView>();
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             dtgrdwMatrix1.AllowUserToAddRows = false; //запрешаем пользователю самому добавлять строки
@@ -37,6 +41,8 @@ namespace SisAn
             dtgrdwExp.Columns.Add("exp", "Эксперт");
             dtgrdwExp.Columns.Add("Eval", "Оценка");
             groupBox1.Visible = false;
+            dtgrdwMatrix2.EditingControlShowing +=
+                new DataGridViewEditingControlShowingEventHandler(dtgrdwMatrix2_EditingControlShowing);
 
         }
 
@@ -89,6 +95,16 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))//если отмечен, то 2 алгоритм
                             {
+                                //проверка на возможность упорядочивания
+                                bool test = true;
+                                for (int i = 0; i<dtgrdwMatrix2.RowCount; i++)
+                                {
+                                    if (!(test = RecountMatrix2(i)))
+                                        break;
+                                }
+                                if (!test)
+                                    break;
+                                ///
                                 float R = 0;
                                 int countExp = dtgrdwExp.Rows.Count;
                                 int countAlt = lstbxAltList.Items.Count;
@@ -413,6 +429,7 @@ namespace SisAn
                     dtgrdwMatrix2.Rows[ind].HeaderCell.Value = "Э" + (ind + 1).ToString();
                     ind++;
                 }
+                FillingMatrix2();
                 //добавляется в третий метод     
 
                 dtgrdwMatrix3.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
@@ -471,18 +488,29 @@ namespace SisAn
         {
             if ((lstbxAltList.Items.Count != 0) && (lstbxAltList.SelectedIndex != -1))
             {
+                _altCount--;
                 int ch = lstbxAltList.SelectedItem.ToString().IndexOf("]");
                 int k = int.Parse(lstbxAltList.SelectedItem.ToString().Substring(1, ch - 1));
                 //удаляются столбцы в матрицах
                 dtgrdwMatrix1.Rows.RemoveAt(k - 1);
                 dtgrdwMatrix1.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix2.Columns.RemoveAt(k - 1);
+                FillingMatrix2();
+
                 dtgrdwMatrix3.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix4.Columns.RemoveAt(k - 1);
                 foreach (var dg in myGrid)
                 {
-                    dg.Columns.RemoveAt(k-1);
-                    dg.Rows.RemoveAt(k-1);
+                    if (k - 1 == 0)
+                    {
+                        dg.Columns.RemoveAt(1);
+                        dg.Rows.RemoveAt(1);
+                    }
+                    else
+                    {
+                        dg.Columns.RemoveAt(k - 1);
+                        dg.Rows.RemoveAt(k - 1);
+                    }
                 }
                 lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);//удаляется в списке альтернатив
                 for (int i = 0; i < lstbxAltList.Items.Count; i++)
@@ -1005,7 +1033,9 @@ namespace SisAn
                             {
                                 dtgrdwMatrix2.Rows.Add();
                                 dtgrdwMatrix2.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
-                                dtgrdwMatrix3.Rows.Add();
+                                for (int i = 0; i < _altCount; i++)
+                                    dtgrdwMatrix2.Rows[_expCount - 1].Cells[i].Value = (1.0 / _altCount).ToString();
+                               dtgrdwMatrix3.Rows.Add();
                                 dtgrdwMatrix3.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
                                 dtgrdwMatrix4.Rows.Add();
                                 dtgrdwMatrix4.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
@@ -1059,8 +1089,7 @@ namespace SisAn
         }
 
         private void списокЭкспертовToolStripMenuItem1_Click(object sender, EventArgs e) //загрузка списка экспертов
-        {
-            
+        {            
             switch (tabControl1.SelectedIndex)
             {
                 case 1:
@@ -1130,7 +1159,7 @@ namespace SisAn
                                         dtrdwView.Columns[ind].Width = 40;
                                         ind++;
                                     }
-                                    dtgrdwMatrix2.Rows.Add();
+                                    dtgrdwMatrix2.Rows.Add();                                    
                                     dtgrdwMatrix3.Rows.Add();
                                     dtgrdwMatrix4.Rows.Add();
                                     dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
@@ -1151,9 +1180,9 @@ namespace SisAn
                         }
                     }
                     
-                    break;
-                
+                    break;                
             }
+            FillingMatrix2();
         }
 
         private void списокЭкспертовToolStripMenuItem_Click(object sender, EventArgs e)//сохранение списка экспертов
@@ -1270,6 +1299,79 @@ namespace SisAn
                     (1.0 - Convert.ToSingle(dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value));
         }
 
-     
+        private void check2()
+        {
+
+        }
+
+
+        private void dtgrdwMatrix2_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress +=
+                new KeyPressEventHandler(Control_KeyPress);
+        }
+
+        private void Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string curr = dtgrdwMatrix2.CurrentCell.Value.ToString();
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                dtgrdwMatrix2.CurrentCell.Value = curr + e.KeyChar;
+
+            curr = dtgrdwMatrix2.CurrentCell.Value.ToString();
+
+            if ((e.KeyChar == 8)&&(curr.Length>2))
+                dtgrdwMatrix2.CurrentCell.Value = curr.Remove(curr.Length - 1, 1);
+        } 
+
+        private void dtgrdwMatrix2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string curr = dtgrdwMatrix2.CurrentCell.Value.ToString();
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                dtgrdwMatrix2.CurrentCell.Value = curr + e.KeyChar;
+
+            curr = dtgrdwMatrix2.CurrentCell.Value.ToString();
+
+            if ((e.KeyChar == 8) && (curr.Length > 2))
+                dtgrdwMatrix2.CurrentCell.Value = curr.Remove(curr.Length - 1, 1);
+
+            RecountMatrix2(dtgrdwMatrix2.CurrentCell.RowIndex);
+
+        }
+
+        private bool RecountMatrix2(int row)
+        {
+            double summ = 0, value=0;
+            for(int i=0; i<dtgrdwMatrix2.ColumnCount; i++)
+            {
+                Double.TryParse(dtgrdwMatrix2[i, row].Value.ToString(), out value);
+                summ += value;
+            }
+            if (summ != 1)
+            {
+                for (int i = 0; i < dtgrdwMatrix2.ColumnCount; i++)
+                {
+                    dtgrdwMatrix2[i, row].Style.BackColor = Color.Red;
+                }
+                return false;
+            }
+            else
+            {
+                for (int i = 0; i < dtgrdwMatrix2.ColumnCount; i++)
+                {
+                    dtgrdwMatrix2[i, row].Style.BackColor = Color.White;
+                }
+                return true;
+            }
+
+        }
+
+        private void FillingMatrix2()
+        {
+            for (int i=0; i<dtgrdwMatrix2.ColumnCount; i++)
+            {
+                for (int j = 0; j < dtgrdwMatrix2.RowCount; j++)
+                    dtgrdwMatrix2[i, j].Value = (1.0 / _altCount).ToString();
+            }
+        }
     }
 }
