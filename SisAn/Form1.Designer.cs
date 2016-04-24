@@ -337,10 +337,11 @@
             this.dtgrdwMatrix1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrdwMatrix1.Location = new System.Drawing.Point(6, 177);
             this.dtgrdwMatrix1.Name = "dtgrdwMatrix1";
+            this.dtgrdwMatrix1.ReadOnly = true;
             this.dtgrdwMatrix1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgrdwMatrix1.Size = new System.Drawing.Size(321, 261);
             this.dtgrdwMatrix1.TabIndex = 46;
-            this.dtgrdwMatrix1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dtgrdwMatrix1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgrdwMatrix1_CellClick);
             // 
             // lstbxAltNewList
             // 

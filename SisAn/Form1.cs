@@ -371,39 +371,7 @@ namespace SisAn
             }
         }
 
-        bool check() //проверки
-        {
-
-            for (int i = 0; i < dtgrdwMatrix1.Rows.Count; i++)
-            {
-                for (int j = 0; j < dtgrdwMatrix1.Columns.Count; j++)
-                {
-                    if (i != j)
-                        if ((!el.Contains(dtgrdwMatrix1[i, j].Value)))
-                        {
-                            MessageBox.Show("Неверно задана матрица предпочтений!");
-                            dtgrdwMatrix1[i, j].Value = "1";
-                            dtgrdwMatrix1[j, i].Value = "0";
-                            return false;
-                        }
-                        else
-                        {
-                            float a = Convert.ToSingle(dtgrdwMatrix1[i, j].Value) +
-                                      Convert.ToSingle(dtgrdwMatrix1[j, i].Value);
-                            if (a !=
-                                1.0)
-                            {
-                                MessageBox.Show("Неверно задана матрица предпочтений!");
-                                dtgrdwMatrix1[i, j].Style.BackColor = dtgrdwMatrix1[j, i].Style.BackColor = Color.Red;
-                                return false;
-                            }
-                            else
-                                return true;
-                        }
-                }
-            }
-            return true;
-        }
+       
 
         private void Add_altern_Click(object sender, EventArgs e) //добавить альтернативу
         {
@@ -592,16 +560,6 @@ namespace SisAn
             }
         }
 
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e) //автоподстановка для 1 метода
-        {
-            if (tabControl1.SelectedIndex == 0)
-            {
-
-                dtgrdwMatrix1[e.RowIndex, e.ColumnIndex].Value =
-                    (1.0 - Convert.ToSingle(dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value));
-                check();
-            }
-        }
 
         private void матрицаПредпочтенийToolStripMenuItem1_Click(object sender, EventArgs e) //сохранение МП
         {
@@ -1000,8 +958,6 @@ namespace SisAn
             }
         }
 
-
-
         private void add_exp_Click(object sender, EventArgs e) //добавить эксперта
         {
             switch (tabControl1.SelectedIndex)//для 2,3,4 
@@ -1069,7 +1025,6 @@ namespace SisAn
             }
             txtExpEdit.Text = "";
         }
-
 
         private void dtgrdwExp_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) //при двойном щелчке переместить в форму для редактирования
         {
@@ -1296,8 +1251,25 @@ namespace SisAn
 
         }
 
-       
+        private void dtgrdwMatrix1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == e.RowIndex)
+                return;
 
+            double number = 0;
+            Double.TryParse(dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value.ToString(), out number);
+            if (number + 0.5 > 1)
+            {
+                dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value = "0";
+            }
+            else
+            {
+                dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value = (number+0.5).ToString();
+            }
+            dtgrdwMatrix1[e.RowIndex, e.ColumnIndex].Value =
+                    (1.0 - Convert.ToSingle(dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value));
+        }
 
+     
     }
 }
