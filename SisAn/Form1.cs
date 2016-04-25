@@ -198,6 +198,17 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))//если отмечен, то 4 алгоритм
                             {
+                                ////проверка на возможность упорядочивания
+                                bool test = true;
+                                int k = 0;
+                                for (int i = 0; i < dtgrdwMatrix4.RowCount; i++)
+                                {
+                                    if (!(test = RecountMatrix4(i)))
+                                        k++;
+                                }
+                                if (k != 0)
+                                    break;
+                                /// 
                                 int countExp = dtgrdwExp.Rows.Count;
                                 int countAlt = lstbxAltList.Items.Count;
                                 string[] sortedList = new string[countAlt];
@@ -467,6 +478,10 @@ namespace SisAn
                     dtgrdwMatrix4.Rows.Add();
                     dtgrdwMatrix4.Rows[ind3].HeaderCell.Value = "Э" + (ind3 + 1).ToString();
                     ind3++;
+                }
+                for (int i = 0; i < _expCount; i++)
+                {
+                    dtgrdwMatrix4.Rows[i].Cells[_altCount - 1].Value = 0.ToString();
                 }
                 //добавляется 5 метод
                 int ind4 = 0;
@@ -795,6 +810,12 @@ namespace SisAn
                     dtgrdwMatrix4.Rows[ind3].HeaderCell.Value = "Э" + (ind3 + 1).ToString();
                     ind3++;
                 }
+                for (int i = 0; i < dtgrdwMatrix4.RowCount; i++)
+                {
+                    for (int j = 0; j < dtgrdwMatrix4.ColumnCount; j++)
+                        dtgrdwMatrix4.Rows[i].Cells[j].Value = 0.ToString();
+                }
+
                 for (int i = 0; i < _expCount; i++)
                 {
                     TabPage newTabPage = new TabPage();
@@ -898,16 +919,14 @@ namespace SisAn
                                 pos++;
                                 dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                             }
-                            //проверка входной матрицы
-                            RecountMatrix2(i);
+                            
                         }
                         load = true;
                     }
-                    for (int i = 0; i < dtgrdwMatrix2.RowCount; i++)
-                    {
+                        //проверка входной матрицы
+                        for (int i = 0; i < dtgrdwMatrix2.RowCount; i++)
                         RecountMatrix2(i);
                     }
-                }
                     break;
                 case 2:
                     {
@@ -936,10 +955,9 @@ namespace SisAn
                             }
                             load = true;
                         }
+                        //проверка входной матрицы
                         for (int i = 0; i < dtgrdwMatrix2.RowCount; i++)
-                        {
                             RecountMatrix3(i);
-                        }
                     }
                     break;
                 case 3:
@@ -969,6 +987,10 @@ namespace SisAn
                             }
                             load = true;
                         }
+                        //проверка входной матрицы
+                        for (int i = 0; i < dtgrdwMatrix4.RowCount; i++)
+                            RecountMatrix4(i);
+
                     }
                     break;
                 case 4:
@@ -1088,6 +1110,10 @@ namespace SisAn
 
                                 dtgrdwMatrix4.Rows.Add();
                                 dtgrdwMatrix4.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
+                                for (int i = 0; i < _expCount; i++)
+                                {
+                                    dtgrdwMatrix4.Rows[_expCount-1].Cells[i].Value = 0.ToString();
+                                }
                             }
                         }
                     }
@@ -1220,9 +1246,11 @@ namespace SisAn
                                     for (int j = 0; j < _altCount; j++)
                                     {
                                         dtgrdwMatrix3.Rows[i].Cells[j].Value = (j + 1).ToString();
-                                        dtgrdwMatrix4[j, i].Value = "";
+                                        dtgrdwMatrix4.Rows[i].Cells[j].Value = 0.ToString();
                                     }
                                 }
+                                
+
                                 FillingMatrix2();
 
                             }
@@ -1462,6 +1490,39 @@ namespace SisAn
                         dtgrdwMatrix3[i, row].Style.BackColor = Color.Red;
                     }
                 }
+            }
+            return correct;
+        }
+
+        private void dtgrdwMatrix4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string curr = dtgrdwMatrix3.CurrentCell.Value.ToString();
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                dtgrdwMatrix4.CurrentCell.Value = curr + e.KeyChar;
+
+            curr = dtgrdwMatrix3.CurrentCell.Value.ToString();
+
+            if ((e.KeyChar == 8) && (curr.Length > 0))
+                dtgrdwMatrix4.CurrentCell.Value = curr.Remove(curr.Length - 1, 1);
+
+            RecountMatrix4(dtgrdwMatrix4.CurrentCell.RowIndex);
+
+        }
+
+        private bool RecountMatrix4(int row)
+        {
+            bool correct = true;
+            for (int i = 0; i < _altCount; i++)
+            {
+                int numb = 0;
+                int.TryParse(dtgrdwMatrix4.Rows[row].Cells[i].Value.ToString(), out numb);
+                if (numb >10)
+                {
+                    dtgrdwMatrix3[i, row].Style.BackColor = Color.Red;
+                    correct = false;
+                }
+                else
+                    dtgrdwMatrix3[i, row].Style.BackColor = Color.White;
             }
             return correct;
         }

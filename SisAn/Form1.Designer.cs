@@ -500,9 +500,11 @@
             this.dtgrdwMatrix4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrdwMatrix4.Location = new System.Drawing.Point(6, 173);
             this.dtgrdwMatrix4.Name = "dtgrdwMatrix4";
+            this.dtgrdwMatrix4.ReadOnly = true;
             this.dtgrdwMatrix4.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgrdwMatrix4.Size = new System.Drawing.Size(321, 261);
             this.dtgrdwMatrix4.TabIndex = 50;
+            this.dtgrdwMatrix4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtgrdwMatrix4_KeyPress);
             // 
             // listRang
             // 
