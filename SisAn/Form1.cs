@@ -1518,11 +1518,11 @@ namespace SisAn
                 int.TryParse(dtgrdwMatrix4.Rows[row].Cells[i].Value.ToString(), out numb);
                 if (numb >10)
                 {
-                    dtgrdwMatrix3[i, row].Style.BackColor = Color.Red;
+                    dtgrdwMatrix4[i, row].Style.BackColor = Color.Red;
                     correct = false;
                 }
                 else
-                    dtgrdwMatrix3[i, row].Style.BackColor = Color.White;
+                    dtgrdwMatrix4[i, row].Style.BackColor = Color.White;
             }
             return correct;
         }
