@@ -1496,17 +1496,19 @@ namespace SisAn
 
         private void dtgrdwMatrix4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string curr = dtgrdwMatrix3.CurrentCell.Value.ToString();
-            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+            string curr = dtgrdwMatrix4.CurrentCell.Value.ToString();
+            if ((e.KeyChar == '0') && (curr == "1"))
                 dtgrdwMatrix4.CurrentCell.Value = curr + e.KeyChar;
+            else
+            {
+                if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                    dtgrdwMatrix4.CurrentCell.Value = e.KeyChar;
+            }
 
-            curr = dtgrdwMatrix3.CurrentCell.Value.ToString();
+            curr = dtgrdwMatrix4.CurrentCell.Value.ToString();
 
             if ((e.KeyChar == 8) && (curr.Length > 0))
                 dtgrdwMatrix4.CurrentCell.Value = curr.Remove(curr.Length - 1, 1);
-
-            RecountMatrix4(dtgrdwMatrix4.CurrentCell.RowIndex);
-
         }
 
         private bool RecountMatrix4(int row)
