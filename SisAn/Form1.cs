@@ -251,6 +251,8 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))
                             {
+                                if (sizeSh.BackColor == Color.Red)
+                                    break;
                                 
                                 float[,] F = new float[_expCount, _altCount];
                                 float[,] _fi=new float[_expCount, _altCount];
@@ -1151,6 +1153,8 @@ namespace SisAn
                 dtgrdwExp.Rows.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);//из списка экспертов
                 
                 tabControl2.TabPages.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
+                myGrid.RemoveAt(dtgrdwExp.SelectedCells[0].RowIndex);
+
                 for (int i = 0; i < dtgrdwExp.Rows.Count; i++)
                 {
                     dtgrdwExp.Rows[i].HeaderCell.Value = (i+1).ToString();
@@ -1159,6 +1163,7 @@ namespace SisAn
                     dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                     dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                 }
+                
             }
 
         }
@@ -1210,6 +1215,11 @@ namespace SisAn
                                 
                                 for (int i = 0; i < _expCount; i++)
                                 {
+                                    int denom = 0;
+                                    int.TryParse(sizeSh.Text, out denom);
+                                    if (denom < 2)
+                                        denom = 2;
+
                                     TabPage newTabPage = new TabPage();
                                     newTabPage.Text = "Э" + (i + 1).ToString();
                                     tabControl2.TabPages.Add(newTabPage); //добавим новую вкладку
@@ -1234,6 +1244,24 @@ namespace SisAn
                                         dtrdwView.Columns[ind].Width = 40;
                                         ind++;
                                     }
+                                    for (int k = 0; k < dtrdwView.RowCount; k++)
+                                    {
+                                        for (int j = 0; j < dtrdwView.ColumnCount; j++)
+                                        {
+                                            if (k == j)
+                                            {
+                                                dtrdwView.Rows[k].Cells[j].Style.BackColor = Color.Blue;
+                                                dtrdwView.Rows[k].Cells[j].Value = "";
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                dtrdwView.Rows[k].Cells[j].Value = "1/" + denom.ToString();
+                                                dtrdwView.Rows[j].Cells[k].Value = (denom-1).ToString()+"/" + denom.ToString();
+                                            }
+                                        }
+                                    }
+
                                     dtgrdwMatrix2.Rows.Add();                                    
                                     dtgrdwMatrix3.Rows.Add();
                                     dtgrdwMatrix4.Rows.Add();
@@ -1529,5 +1557,43 @@ namespace SisAn
             return correct;
         }
 
+        private void sizeSh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                sizeSh.Text += e.KeyChar;
+
+            if ((e.KeyChar == 8) && (sizeSh.Text.Length > 0))
+                sizeSh.Text = sizeSh.Text.Remove(sizeSh.Text.Length - 1, 1);
+            
+        }
+
+        private void sizeSh_TextChanged(object sender, EventArgs e)
+        {
+            if (sizeSh.Text == "" || sizeSh.Text == "1" || sizeSh.Text == "0")
+                sizeSh.BackColor = Color.Red;
+            else
+                sizeSh.BackColor = Color.White;
+            RecountMatrix5();
+        }
+
+        private void RecountMatrix5()
+        {
+            int denom = 0;
+            int.TryParse(sizeSh.Text, out denom);
+            foreach (var grid in myGrid)
+            {
+                for (int i = 0; i < grid.RowCount; i++)
+                {
+                    for (int j = 0; j < grid.ColumnCount; j++)
+                    {
+                        if (i == j)
+                            continue;
+                        grid.Rows[i].Cells[j].Value = "1/" + sizeSh.Text;
+                        grid.Rows[j].Cells[i].Value = (denom-1).ToString()+"/" + sizeSh.Text;
+
+                    }
+                }
+            }
+        }
     }
 }

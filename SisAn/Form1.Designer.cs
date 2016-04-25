@@ -137,7 +137,7 @@
             this.списокЭкспертовToolStripMenuItem1,
             this.матрицаПредпочтенийToolStripMenuItem});
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             // 
             // альтернативаToolStripMenuItem
@@ -168,7 +168,7 @@
             this.списокАльтернативToolStripMenuItem,
             this.матрицаПредпочтенийToolStripMenuItem1});
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // списокЭкспертовToolStripMenuItem
@@ -534,8 +534,12 @@
             // 
             this.sizeSh.Location = new System.Drawing.Point(330, 193);
             this.sizeSh.Name = "sizeSh";
+            this.sizeSh.ReadOnly = true;
             this.sizeSh.Size = new System.Drawing.Size(80, 20);
             this.sizeSh.TabIndex = 58;
+            this.sizeSh.Text = "2";
+            this.sizeSh.TextChanged += new System.EventHandler(this.sizeSh_TextChanged);
+            this.sizeSh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sizeSh_KeyPress);
             // 
             // label19
             // 
