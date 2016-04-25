@@ -95,16 +95,17 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))//если отмечен, то 2 алгоритм
                             {
-                                //проверка на возможность упорядочивания
+                                /////проверка на возможность упорядочивания
                                 bool test = true;
+                                int k = 0;
                                 for (int i = 0; i<dtgrdwMatrix2.RowCount; i++)
                                 {
                                     if (!(test = RecountMatrix2(i)))
-                                        break;
+                                        k++;
                                 }
-                                if (!test)
+                                if (k!=0)
                                     break;
-                                ///
+                                /////
                                 float R = 0;
                                 int countExp = dtgrdwExp.Rows.Count;
                                 int countAlt = lstbxAltList.Items.Count;
@@ -144,6 +145,17 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))//если отмечен, то 3 алгоритм
                             {
+                                ////проверка на возможность упорядочивания
+                                bool test = true;
+                                int k = 0;
+                                for (int i = 0; i < dtgrdwMatrix3.RowCount; i++)
+                                {
+                                    if (!(test = RecountMatrix3(i)))
+                                        k++;
+                                }
+                                if (k != 0)
+                                    break;
+                                /// 
                                 int countExp = dtgrdwExp.Rows.Count;
                                 int countAlt = lstbxAltList.Items.Count;
                                 string[] sortedList = new string[countAlt];
@@ -863,36 +875,39 @@ namespace SisAn
                     }
                     break;
                 case 1:
+                {
+                    if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        string[] str = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
+                        int pos = 0;
+                        dtgrdwMatrix2.Rows.Clear();
+                        dtgrdwMatrix2.Columns.Clear();
+                        string[] buf = str[0].Split('\t');
+                        for (int i = 0; i < buf.Length; i++)
                         {
-                            string[] str = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
-                            int pos = 0;
-                            dtgrdwMatrix2.Rows.Clear();
-                            dtgrdwMatrix2.Columns.Clear();
-                            string[] buf = str[0].Split('\t');
-                            for (int i = 0; i < buf.Length; i++)
-                            {
-                                dtgrdwMatrix2.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
-                            }
-
-                            dtgrdwMatrix2.Rows.Add(str.Length);
-                            for (int i = 0; i < str.Length; i++)
-                            {
-                                buf = str[i].Split('\t');
-                                for (int j = 0; j < buf.Length; j++)
-                                {
-                                    dtgrdwMatrix2[j, i].Value = buf[j];
-                                    pos++;
-                                    dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
-                                }
-                                //проверка входной матрицы
-                                RecountMatrix2(i);
-                            }
-                            load = true;
+                            dtgrdwMatrix2.Columns.Add("z" + (i + 1).ToString(), "z" + (i + 1).ToString());
                         }
-                        
+
+                        dtgrdwMatrix2.Rows.Add(str.Length);
+                        for (int i = 0; i < str.Length; i++)
+                        {
+                            buf = str[i].Split('\t');
+                            for (int j = 0; j < buf.Length; j++)
+                            {
+                                dtgrdwMatrix2[j, i].Value = buf[j];
+                                pos++;
+                                dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
+                            }
+                            //проверка входной матрицы
+                            RecountMatrix2(i);
+                        }
+                        load = true;
                     }
+                    for (int i = 0; i < dtgrdwMatrix2.RowCount; i++)
+                    {
+                        RecountMatrix2(i);
+                    }
+                }
                     break;
                 case 2:
                     {
@@ -920,6 +935,10 @@ namespace SisAn
                                 }
                             }
                             load = true;
+                        }
+                        for (int i = 0; i < dtgrdwMatrix2.RowCount; i++)
+                        {
+                            RecountMatrix3(i);
                         }
                     }
                     break;
@@ -1330,11 +1349,6 @@ namespace SisAn
                     (1.0 - Convert.ToSingle(dtgrdwMatrix1[e.ColumnIndex, e.RowIndex].Value));
         }
 
-        private void check2()
-        {
-
-        }
-
 
         private void dtgrdwMatrix2_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -1404,5 +1418,53 @@ namespace SisAn
                     dtgrdwMatrix2[i, j].Value = (1.0 / _altCount).ToString();
             }
         }
+
+        private void dtgrdwMatrix3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string curr = dtgrdwMatrix3.CurrentCell.Value.ToString();
+            if ((e.KeyChar >= '0') && (e.KeyChar <='9'))
+                dtgrdwMatrix3.CurrentCell.Value = curr + e.KeyChar;
+
+            curr = dtgrdwMatrix3.CurrentCell.Value.ToString();
+
+            if ((e.KeyChar == 8) && (curr.Length > 0))
+                dtgrdwMatrix3.CurrentCell.Value = curr.Remove(curr.Length - 1, 1);
+
+            RecountMatrix3(dtgrdwMatrix3.CurrentCell.RowIndex);
+
+        }
+
+        private bool RecountMatrix3(int row)
+        {
+            bool correct = true;
+            List<int> numbs = new List<int>();
+          
+            for (int i = 0; i < _altCount; i++)
+            {
+                int numb = 0;
+                int.TryParse(dtgrdwMatrix3.Rows[row].Cells[i].Value.ToString(), out numb);
+                if (numb > _altCount||numb==0)
+                {
+                    dtgrdwMatrix3[i, row].Style.BackColor = Color.Red;
+                    correct = false;
+                }
+                else
+                    dtgrdwMatrix3[i, row].Style.BackColor = Color.White;
+                numbs.Add(numb);
+
+                for (int j = 0; j < i; j++)
+                {
+                    int buf = 0;
+                    int.TryParse(dtgrdwMatrix3.Rows[row].Cells[j].Value.ToString(), out buf);
+                    if (buf == numb)
+                    {
+                        dtgrdwMatrix3[j, row].Style.BackColor = Color.Red;
+                        dtgrdwMatrix3[i, row].Style.BackColor = Color.Red;
+                    }
+                }
+            }
+            return correct;
+        }
+
     }
 }
