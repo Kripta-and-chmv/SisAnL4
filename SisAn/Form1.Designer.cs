@@ -137,7 +137,7 @@
             this.списокЭкспертовToolStripMenuItem1,
             this.матрицаПредпочтенийToolStripMenuItem});
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             // 
             // альтернативаToolStripMenuItem
@@ -168,7 +168,7 @@
             this.списокАльтернативToolStripMenuItem,
             this.матрицаПредпочтенийToolStripMenuItem1});
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // списокЭкспертовToolStripMenuItem

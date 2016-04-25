@@ -441,6 +441,10 @@ namespace SisAn
                     dtgrdwMatrix3.Rows[ind2].HeaderCell.Value = "Э" + (ind2 + 1).ToString();
                     ind2++;
                 }
+                for (int i = 0; i < _expCount; i++)
+                {
+                    dtgrdwMatrix3.Rows[i].Cells[_altCount - 1].Value = _altCount.ToString();
+                }
                 //добавляется в четвертый метод
 
                 dtgrdwMatrix4.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
@@ -496,21 +500,28 @@ namespace SisAn
                 dtgrdwMatrix1.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix2.Columns.RemoveAt(k - 1);
                 FillingMatrix2();
+                //пересчёт матрицы третьего метода
+                for (int i = 0; i < dtgrdwMatrix3.RowCount; i++)
+                {
+                    int forDel = 0;
+                    int.TryParse(dtgrdwMatrix3.Rows[i].Cells[k - 1].Value.ToString(), out forDel);
 
+                    for (int j = 0; j < dtgrdwMatrix3.ColumnCount; j++)
+                    {
+                        int numb = 0;
+                        int.TryParse(dtgrdwMatrix3.Rows[i].Cells[j].Value.ToString(), out numb);
+
+                        if (numb > forDel)
+                            dtgrdwMatrix3.Rows[i].Cells[j].Value = (numb - 1).ToString();
+                    }
+                }
+                ////////////
                 dtgrdwMatrix3.Columns.RemoveAt(k - 1);
                 dtgrdwMatrix4.Columns.RemoveAt(k - 1);
                 foreach (var dg in myGrid)
                 {
-                    if (k - 1 == 0)
-                    {
-                        dg.Columns.RemoveAt(1);
-                        dg.Rows.RemoveAt(1);
-                    }
-                    else
-                    {
-                        dg.Columns.RemoveAt(k - 1);
-                        dg.Rows.RemoveAt(k - 1);
-                    }
+                    dg.Rows.RemoveAt(k - 1);
+                    dg.Columns.RemoveAt(k - 1);
                 }
                 lstbxAltList.Items.RemoveAt(lstbxAltList.SelectedIndex);//удаляется в списке альтернатив
                 for (int i = 0; i < lstbxAltList.Items.Count; i++)
@@ -535,6 +546,8 @@ namespace SisAn
                                                 lstbxAltList.Items[i].ToString().Remove(0, buf + 2);
                     }
                 }
+
+                
             }
         }
 
@@ -746,6 +759,8 @@ namespace SisAn
                     dtgrdwMatrix2.Rows[ind].HeaderCell.Value = "Э" + (ind + 1).ToString();
                     ind++;
                 }
+                FillingMatrix2();
+
                 int ind2 = 0;
                 while (_expCount != dtgrdwMatrix3.Rows.Count)//если добавляем альтернативы после добавления экспертов
                 {
@@ -753,6 +768,14 @@ namespace SisAn
                     dtgrdwMatrix3.Rows[ind2].HeaderCell.Value = "Э" + (ind2 + 1).ToString();
                     ind2++;
                 }
+                for (int j = 0; j < _expCount; j++)
+                {
+                    for (int i = 0; i < _expCount; i++)
+                    {
+                        dtgrdwMatrix3[j, i].Value = (i + 1).ToString();
+                    }
+                }
+
                 int ind3 = 0;
                 while (_expCount != dtgrdwMatrix4.Rows.Count)//если добавляем альтернативы после добавления экспертов
                 {
@@ -863,9 +886,12 @@ namespace SisAn
                                     pos++;
                                     dtgrdwMatrix2.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                                 }
+                                //проверка входной матрицы
+                                RecountMatrix2(i);
                             }
                             load = true;
                         }
+                        
                     }
                     break;
                 case 2:
@@ -1035,8 +1061,12 @@ namespace SisAn
                                 dtgrdwMatrix2.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
                                 for (int i = 0; i < _altCount; i++)
                                     dtgrdwMatrix2.Rows[_expCount - 1].Cells[i].Value = (1.0 / _altCount).ToString();
-                               dtgrdwMatrix3.Rows.Add();
+
+                                dtgrdwMatrix3.Rows.Add();
                                 dtgrdwMatrix3.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
+                                for (int i = 0; i < _altCount; i++)
+                                    dtgrdwMatrix3.Rows[_expCount - 1].Cells[i].Value = (i+1).ToString();
+
                                 dtgrdwMatrix4.Rows.Add();
                                 dtgrdwMatrix4.Rows[_expCount - 1].HeaderCell.Value = "Э" + _expCount;
                             }
@@ -1166,15 +1196,16 @@ namespace SisAn
                                     dtgrdwMatrix3.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                                     dtgrdwMatrix4.Rows[i].HeaderCell.Value = "Э" + (i + 1).ToString();
                                 }
-                                for (int j = 0; j < _expCount; j++)
+                                for (int i = 0; i < _expCount; i++)
                                 {
-                                    for (int i = 0; i < _expCount; i++)
+                                    for (int j = 0; j < _altCount; j++)
                                     {
-                                        dtgrdwMatrix2[j, i].Value = "";
-                                        dtgrdwMatrix3[j, i].Value = "";
+                                        dtgrdwMatrix3.Rows[i].Cells[j].Value = (j + 1).ToString();
                                         dtgrdwMatrix4[j, i].Value = "";
                                     }
                                 }
+                                FillingMatrix2();
+
                             }
 
                         }
