@@ -231,7 +231,7 @@ namespace SisAn
                                 {
                                     for (int j = 0; j < countExp; j++)
                                     {
-                                        newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix4[i, j].Value) / S_i[j];
+                                        newMatr[j, i] = Convert.ToSingle(dtgrdwMatrix4[i, j].Value.ToString()) / S_i[j];
                                     }
                                 }
                                 for (int j = 0; j < countAlt; j++)
