@@ -251,9 +251,26 @@ namespace SisAn
                         {
                             if (checkBox.GetItemChecked(ind))
                             {
+                                //проверка на возможность упорядочивания
                                 if (sizeSh.BackColor == Color.Red)
                                     break;
-                                
+                                bool test = true;
+                                foreach (var grid in myGrid)
+                                {
+                                    for (int i = 0; i < grid.RowCount; i++)
+                                    {
+                                        for(int j=0; j<grid.ColumnCount; j++)
+                                            if (grid.Rows[i].Cells[j].Style.BackColor == Color.Red)
+                                            {
+                                                test = false;
+                                                break;
+                                            }
+                                        if (!test) break;
+                                    }
+                                    if (!test) break;
+                                }
+                                if (!test) break;
+                                //
                                 float[,] F = new float[_expCount, _altCount];
                                 float[,] _fi=new float[_expCount, _altCount];
                                 float[] V=new float[_altCount];
@@ -1628,20 +1645,45 @@ namespace SisAn
 
         private void tabControl2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            int r = tabControl2.SelectedIndex;
+           int r = tabControl2.SelectedIndex;
             //myGrid[r].Rows[0].Cells[0].Value = "rere";
-        
-            string curr = myGrid[r].CurrentCell.Value.ToString().
-                Remove(myGrid[r].CurrentCell.Value.ToString().Length - 2, 2);
+
+            string[] curr = myGrid[r].CurrentCell.Value.ToString().Split('/');
 
             if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
-                myGrid[r].CurrentCell.Value = curr + e.KeyChar+"/";
-            
+                myGrid[r].CurrentCell.Value = curr[0] + e.KeyChar+"/"+curr[1];
 
-            curr = myGrid[r].CurrentCell.Value.ToString();
 
-            if ((e.KeyChar == 8) && (curr.Length > sizeSh.Text.Length+1))
-                myGrid[r].CurrentCell.Value = curr.Remove(curr.Length - 3, 1);
+           curr = myGrid[r].CurrentCell.Value.ToString().Split('/');
+
+            if ((e.KeyChar == 8) && (curr[0].Length > 0))
+                myGrid[r].CurrentCell.Value = curr[0].Remove(curr[0].Length - 1, 1)+'/'+curr[1];
+
+            curr = myGrid[r].CurrentCell.Value.ToString().Split('/');
+
+            int ch = 0, zn = 0;
+            int.TryParse(curr[0], out ch);
+            int.TryParse(curr[1], out zn);
+            if (ch > zn)
+            {
+                int i = myGrid[r].CurrentCell.RowIndex, j = myGrid[r].CurrentCell.ColumnIndex;
+                if (i != j)
+                {
+                    myGrid[r].CurrentCell.Style.BackColor = Color.Red;
+                    myGrid[r].Rows[j].Cells[i].Style.BackColor = Color.Red;
+                }
+            }
+            else
+            {
+                int i = myGrid[r].CurrentCell.RowIndex, j = myGrid[r].CurrentCell.ColumnIndex;
+
+                myGrid[r].Rows[i].Cells[j].Style.BackColor = Color.White;
+                myGrid[r].Rows[j].Cells[i].Style.BackColor = Color.White;
+
+                if (i != j)
+                    myGrid[r].Rows[j].Cells[i].Value = (zn - ch).ToString() + '/' + curr[1];
+
+            }
 
         }
     }
