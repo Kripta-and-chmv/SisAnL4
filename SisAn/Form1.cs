@@ -502,17 +502,19 @@ namespace SisAn
                     newTabPage.Controls.Add(myGrid[ind4]);
                     ind4++;
                 }
-                  foreach (var dg in myGrid)
-                    {
-                        dg.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
-                            "z" + lstbxAltList.Items.Count.ToString());
-                        dg.Rows.Add();
-                        dg.Rows[_altCount-1].HeaderCell.Value = "Z" + _altCount.ToString();
-                        dg.AllowUserToAddRows = false;
-                        dg.AutoSize = true;
-                        dg.AutoResizeColumns();
-                    }
-                
+                foreach (var dg in myGrid)
+                {
+                    dg.Columns.Add("z" + lstbxAltList.Items.Count.ToString(),
+                        "z" + lstbxAltList.Items.Count.ToString());
+                    dg.Rows.Add();
+                    dg.Rows[_altCount - 1].HeaderCell.Value = "Z" + _altCount.ToString();
+                    dg.AllowUserToAddRows = false;
+                    dg.AutoSize = true;
+                    dg.AutoResizeColumns();
+                }
+
+                RecountMatrix5(_altCount-1);
+
 
             }
         }
@@ -1088,9 +1090,31 @@ namespace SisAn
                                     "z" + (ind+1).ToString());
                                 
                                 dtrdwView.Rows.Add();
-                                dtrdwView.Rows[ind].HeaderCell.Value = "Z" + (ind + 1).ToString();
+                                dtrdwView.Rows[ind].HeaderCell.Value = "z" + (ind + 1).ToString();
                                 dtrdwView.Columns[ind].Width = 40;
                                 ind++;
+                            }
+                            //заполнение таблицы
+                            int denom = 0;
+                            int.TryParse(sizeSh.Text, out denom);
+                            if (denom < 2)
+                                denom = 2;
+                            for (int k = 0; k < dtrdwView.RowCount; k++)
+                            {
+                                for (int j = 0; j < dtrdwView.ColumnCount; j++)
+                                {
+                                    if (k == j)
+                                    {
+                                        dtrdwView.Rows[k].Cells[j].Style.BackColor = Color.Blue;
+                                        dtrdwView.Rows[k].Cells[j].Value = "";
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        dtrdwView.Rows[k].Cells[j].Value = "1/" + denom.ToString();
+                                        dtrdwView.Rows[j].Cells[k].Value = (denom - 1).ToString() + "/" + denom.ToString();
+                                    }
+                                }
                             }
                             //дадим ей имя, для удобства обращения к ней
                             myGrid.Add(dtrdwView);
@@ -1229,7 +1253,7 @@ namespace SisAn
                                     dtrdwView.AllowUserToAddRows = false;
                                     dtrdwView.Size = new Size(321, 261);
                                     dtrdwView.AutoResizeColumns();
-
+                                    dtrdwView.ReadOnly = true;
                                     //дадим ей имя, для удобства обращения к ней
                                     myGrid.Add(dtrdwView);
 
@@ -1573,27 +1597,52 @@ namespace SisAn
                 sizeSh.BackColor = Color.Red;
             else
                 sizeSh.BackColor = Color.White;
-            RecountMatrix5();
+            for (int i = 0; i < _altCount; i++)
+                RecountMatrix5(i);
         }
 
-        private void RecountMatrix5()
+        private void RecountMatrix5(int row)
         {
             int denom = 0;
             int.TryParse(sizeSh.Text, out denom);
+            if (denom < 2)
+                denom = 2;
             foreach (var grid in myGrid)
             {
-                for (int i = 0; i < grid.RowCount; i++)
-                {
-                    for (int j = 0; j < grid.ColumnCount; j++)
-                    {
-                        if (i == j)
-                            continue;
-                        grid.Rows[i].Cells[j].Value = "1/" + sizeSh.Text;
-                        grid.Rows[j].Cells[i].Value = (denom-1).ToString()+"/" + sizeSh.Text;
 
+                for (int i = 0; i < grid.ColumnCount; i++)
+                {
+                    if (i == row)
+                    {
+                        grid.Rows[row].Cells[i].Style.BackColor = Color.Blue;
+                        grid.Rows[row].Cells[i].Value = "";
+                        continue;
                     }
+                    grid.Rows[row].Cells[i].Value = "1/" + denom.ToString();
+                    grid.Rows[i].Cells[row].Value = (denom - 1).ToString() + "/" + denom.ToString();
+
                 }
             }
+            
+        }
+
+        private void tabControl2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int r = tabControl2.SelectedIndex;
+            //myGrid[r].Rows[0].Cells[0].Value = "rere";
+        
+            string curr = myGrid[r].CurrentCell.Value.ToString().
+                Remove(myGrid[r].CurrentCell.Value.ToString().Length - 2, 2);
+
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                myGrid[r].CurrentCell.Value = curr + e.KeyChar+"/";
+            
+
+            curr = myGrid[r].CurrentCell.Value.ToString();
+
+            if ((e.KeyChar == 8) && (curr.Length > sizeSh.Text.Length+1))
+                myGrid[r].CurrentCell.Value = curr.Remove(curr.Length - 3, 1);
+
         }
     }
 }

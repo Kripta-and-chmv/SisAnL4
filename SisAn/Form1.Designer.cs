@@ -557,6 +557,7 @@
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(317, 310);
             this.tabControl2.TabIndex = 56;
+            this.tabControl2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tabControl2_KeyPress);
             // 
             // label18
             // 
