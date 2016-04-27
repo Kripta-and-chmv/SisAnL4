@@ -23,6 +23,8 @@ namespace SisAn
            
         }
 
+
+
         string buf = "";
         string[] el = { "0", "1", "0.5", "_" };
         int _altCount = 0;
@@ -130,7 +132,7 @@ namespace SisAn
                                 {
                                     for (int i = 0; i < countExp; i++) //определяем веса
                                     {
-                                        V[j] += Convert.ToSingle(dtgrdwMatrix2[j, i].Value.ToString().Replace(".", ",")) *
+                                        V[j] += Convert.ToSingle(dtgrdwMatrix2[j, i].Value.ToString()) *
                                                 S[i];
                                     }
                                 }
@@ -601,51 +603,55 @@ namespace SisAn
 
         private void Del_All_Click(object sender, EventArgs e) //очистить все
         {
-            dtgrdwMatrix1.Rows.Clear();
-            dtgrdwMatrix1.Columns.Clear();
-            dtgrdwMatrix2.Rows.Clear();
-            dtgrdwMatrix2.Columns.Clear();
-            dtgrdwMatrix3.Rows.Clear();
-            dtgrdwMatrix3.Columns.Clear();
-            dtgrdwMatrix4.Rows.Clear();
-            dtgrdwMatrix4.Columns.Clear();
-            lstbxAltList.Items.Clear();
-            _expCount = 0;
-            _altCount = 0;
-            load = false;
-            switch (tabControl1.SelectedIndex)
+            if(MessageBox.Show("Вы уверены, что хотите всё отчистить?", "Внимание!", MessageBoxButtons.YesNo) == DialogResult.Yes) 
+
             {
-                case 0:
+                dtgrdwMatrix1.Rows.Clear();
+                dtgrdwMatrix1.Columns.Clear();
+                dtgrdwMatrix2.Rows.Clear();
+                dtgrdwMatrix2.Columns.Clear();
+                dtgrdwMatrix3.Rows.Clear();
+                dtgrdwMatrix3.Columns.Clear();
+                dtgrdwMatrix4.Rows.Clear();
+                dtgrdwMatrix4.Columns.Clear();
+                lstbxAltList.Items.Clear();
+                _expCount = 0;
+                _altCount = 0;
+                load = false;
+                switch (tabControl1.SelectedIndex)
+                {
+                    case 0:
                     {
                         lstbxAltNewList.Items.Clear();
                     }
-                    break;
-                case 1:
+                        break;
+                    case 1:
                     {
                         list_Alt_new.Items.Clear();
                         dtgrdwExp.Rows.Clear();
                     }
-                    break;
-                case 2:
+                        break;
+                    case 2:
                     {
                         listPredp.Items.Clear();
                         dtgrdwExp.Rows.Clear();
                     }
-                    break;
-                case 3:
+                        break;
+                    case 3:
                     {
                         listRang.Items.Clear();
                         dtgrdwExp.Rows.Clear();
                     }
-                    break;
-                case 4:
+                        break;
+                    case 4:
                     {
                         listPar.Items.Clear();
                         dtgrdwExp.Rows.Clear();
                         tabControl2.TabPages.Clear();
                         myGrid.Clear();
                     }
-                    break;
+                        break;
+                }
             }
         }
 
@@ -1684,6 +1690,21 @@ namespace SisAn
                     myGrid[r].Rows[j].Cells[i].Value = (zn - ch).ToString() + '/' + curr[1];
 
             }
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            List<ListBox> lists = new List<ListBox>();
+            lists.Add(lstbxAltNewList);
+            lists.Add(list_Alt_new);
+            lists.Add(listPredp);
+            lists.Add(listRang);
+            lists.Add(listPar);
+
+            Form2 goaway = new Form2(lists);
+            
+            goaway.Show();
 
         }
     }

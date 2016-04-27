@@ -95,6 +95,7 @@
             this.dtgrdwExp = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox = new System.Windows.Forms.CheckedListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -137,7 +138,7 @@
             this.списокЭкспертовToolStripMenuItem1,
             this.матрицаПредпочтенийToolStripMenuItem});
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             // 
             // альтернативаToolStripMenuItem
@@ -168,7 +169,7 @@
             this.списокАльтернативToolStripMenuItem,
             this.матрицаПредпочтенийToolStripMenuItem1});
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // списокЭкспертовToolStripMenuItem
@@ -768,12 +769,23 @@
             this.checkBox.Size = new System.Drawing.Size(224, 94);
             this.checkBox.TabIndex = 44;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(969, 363);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(223, 41);
+            this.button1.TabIndex = 45;
+            this.button1.Text = "Показать всё";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGreen;
             this.ClientSize = new System.Drawing.Size(1204, 601);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
@@ -889,6 +901,7 @@
         private System.Windows.Forms.ListBox listPar;
         private System.Windows.Forms.TextBox sizeSh;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button1;
     }
 }
 
